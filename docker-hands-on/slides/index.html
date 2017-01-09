@@ -7,7 +7,7 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/novencia.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,123 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Docker</h1>
+					<h2>A Novencia hands-on lab</h2>
+					<img src="https://www.docker.com/sites/default/files/moby.svg" height="400"/>
+				</section>
+				<section>
+					<h2>Déroulement</h2>
+					<ul>
+						<li>Docker basics</li>
+						<li>Docker commands</li>
+						<li>writing Dockerfile</li>
+						<li>Tools</li>
+					</ul>
+				</section>
+				<section>
+					<h1 class="section-title">Basics</h1>
+					<section>
+						<h2>What is docker ?</h2>
+						<ul>
+							<li>Container not VM</li>
+							<li>A toolbox</li>
+							<li>Build on linux</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Under the hood</h2>
+						<ul>
+							<li>Linux container (LXC)</li>
+							<li>Control groups</li>
+							<li>UnionFS</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Docker Architecture</h2>
+						<ul>
+							<li>Docker-cli</li>
+							<li>Docker API</li>
+							<li>Docker daemon</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Docker words</h2>
+						<ul>
+							<li>Image</li>
+							<li>Container</li>
+							<li>Repository</li>
+						</ul>
+					</section>
+					<section>
+						<img src="https://docs.docker.com/engine/article-img/architecture.svg" alt="docker architecture"/>
+					</section>
+					<section>
+						<img src="https://github.com/docker/dceu_tutorials/raw/master/images/container-layers.jpg" alt="docker layers"/>
+					</section>
+				</section>
+				<section>
+					<h2>Install docker</h2>
+					<pre><code>apt-get install docker.io</code></pre>
+				</section>
+				<section>
+					<h1 class="section-title">Commands</h1>
+					<section>
+						<h2>Commands</h2>
+						<pre><code>
+$ docker build -t myContainer ./
+$ docker run myContainer
+
+$ docker images
+$ docker ps
+
+$ docker pull
+						</code></pre>
+					</section>
+					<section>
+						<h2>Let's try it</h2>
+						<pre><code>
+$ docker run docker/whalesay cowsay boo
+$ docker run docker/whalesay watch cowsay boo
+						</code></pre>
+						<span class="speaker-notes">Run cowsay with fortune from network ?</span>
+					</section>
+				</section>
+				<section>
+					<h1 class="section-title">Writing Dockerfile</h1>
+					<section>
+						<h2>whalesay Dockerfile</h2>
+						<pre><code>
+FROM ubuntu:14.04
+
+# install cowsay, and move the "default.cow"
+# out of the way so we can overwrite it with "docker.cow"
+RUN apt-get update && apt-get install -y cowsay --no-install-recommends \
+  && rm -rf /var/lib/apt/lists/* \
+  && mv /usr/share/cowsay/cows/default.cow /usr/share/cowsay/cows/orig-default.cow
+
+# "cowsay" installs to /usr/games
+ENV PATH $PATH:/usr/games
+
+COPY docker.cow /usr/share/cowsay/cows/
+RUN ln -sv /usr/share/cowsay/cows/docker.cow /usr/share/cowsay/cows/default.cow
+
+CMD ["cowsay"]
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h2>Docker compose</h2>
+					<ul>
+						<li></li>
+					</ul>
+				</section>
+				<section>
+					<h2>Docker swarm</h2>
+					<ul>
+						<li>https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
