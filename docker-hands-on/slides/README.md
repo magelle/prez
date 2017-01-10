@@ -39,4 +39,7 @@
  
 ![](https://docs.docker.com/engine/article-img/engine-components-flow.png)
 ![](https://docs.docker.com/engine/article-img/architecture.svg)
- 
+
+ * docker whalesay -> pull from docker registry
+ * docker whalesay with fortune -> Custom Dockerfile 
+ * cheat sheet : https://github.com/wsargent/docker-cheat-sheet#dockerfile

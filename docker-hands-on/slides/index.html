@@ -101,10 +101,22 @@ $ docker pull
 						<h2>Let's try it</h2>
 						<pre><code>
 $ docker run docker/whalesay cowsay boo
-$ docker run docker/whalesay watch cowsay boo
 						</code></pre>
-						<span class="speaker-notes">Run cowsay with fortune from network ?</span>
 					</section>
+				</section>
+				<section>
+					<h1 class="section-title">Writing Dockerfile</h1>
+					<pre><code>FROM</code></pre> Sets the Base Image for subsequent instructions.
+					<pre><code>RUN</code></pre> execute a command and create a new layer.
+					<pre><code>CMD</code></pre> provide defaults for an executing container.
+					<pre><code>COPY</code></pre> copies new files or directories to container.
+				</section>
+				<section>
+					<h1 class="section-title">More</h1>
+					<pre><code>ENV</code></pre> sets environment variable.
+					<pre><code>EXPOSE</code></pre> expose container port to the outside.
+					<pre><code>ENTRYPOINT</code></pre> executable to run.
+					<pre><code>VOLUME</code></pre> creates a mount point.
 				</section>
 				<section>
 					<h1 class="section-title">Writing Dockerfile</h1>
