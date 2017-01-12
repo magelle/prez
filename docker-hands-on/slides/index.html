@@ -144,6 +144,36 @@ RUN ln -sv /usr/share/cowsay/cows/docker.cow /usr/share/cowsay/cows/default.cow
 CMD ["cowsay"]
 						</code></pre>
 					</section>
+					<section>
+						<h2>Your mission</h2>
+						<p>Add some fortune to this whale</p>
+					</section>
+					<section>
+						<pre><code>
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install -y cowsay fortune-mod
+RUN mv /usr/share/cowsay/cows/default.cow /usr/share/cowsay/cows/orig-default.cow
+COPY docker.cow /usr/share/cowsay/cows/
+RUN ln -sv /usr/share/cowsay/cows/docker.cow /usr/share/cowsay/cows/default.cow
+
+RUN rm -rf /var/lib/apt/lists/*
+ENV PATH $PATH:/usr/games
+
+CMD fortune | cowsay
+						</code></pre>
+					</section>
+					<section>
+						<h2>Publish it on dockerhub</h2>
+						<ul>
+							<li>Create your account</li>
+							<li>Create a repository</li>
+						</ul>
+						<pre><code>docker tag magelle/whalefortune magelle/whalefortune:1.0.0 </code></pre></li>
+						<pre><code>docker login</code></pre>
+						<pre><code>docker push magelle/whalefortune</code></pre>
+					</section>
 				</section>
 				<section>
 					<h2>Docker compose</h2>
