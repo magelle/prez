@@ -65,6 +65,10 @@
 						</ul>
 					</section>
 					<section>
+						<h2>Docker Architecture</h2>
+						<img src="https://docs.docker.com/engine/article-img/architecture.svg" alt="docker architecture"/>
+					</section>
+					<section>
 						<h2>Docker words</h2>
 						<ul>
 							<li>Image</li>
@@ -73,15 +77,14 @@
 						</ul>
 					</section>
 					<section>
-						<img src="https://docs.docker.com/engine/article-img/architecture.svg" alt="docker architecture"/>
-					</section>
-					<section>
+						<h2>Docker layers</h2>
 						<img src="https://github.com/docker/dceu_tutorials/raw/master/images/container-layers.jpg" alt="docker layers"/>
 					</section>
 				</section>
 				<section>
 					<h2>Install docker</h2>
-					<pre><code>apt-get install docker.io</code></pre>
+					<pre><code>$ sudo apt-get install docker.io</code></pre>
+					<pre><code>$ sudo apt-get install git</code></pre>
 				</section>
 				<section>
 					<h1 class="section-title">Commands</h1>
@@ -146,9 +149,10 @@ CMD ["cowsay"]
 					</section>
 					<section>
 						<h2>Your mission</h2>
-						<p>Add some fortune to this whale</p>
+						<p>Get the whale say fortunes</p>
 					</section>
 					<section>
+						<h2>whalefortune dockerfile</h2>
 						<pre><code>
 FROM ubuntu:latest
 
@@ -171,8 +175,10 @@ CMD fortune | cowsay
 							<li>Should go in /usr/share/games/fortunes/</li>
 							<li>Modify Dockerfile with VOLUME</li>
 						</ul>
+						<pre><code>docker run -ti whalefortune bash</code></pre>
 					</section>
 					<section>
+						<h2>whalefortune dockerfile</h2>
 						<pre><code>
 FROM ubuntu:latest
 
@@ -195,25 +201,52 @@ CMD fortune | cowsay
 							<li>Create your account</li>
 							<li>Create a repository</li>
 						</ul>
-						<pre><code>docker tag magelle/whalefortune magelle/whalefortune:1.0.0 </code></pre></li>
-						<pre><code>docker login</code></pre>
-						<pre><code>docker push magelle/whalefortune</code></pre>
+						<pre><code>$ docker tag magelle/whalefortune magelle/whalefortune:1.0.0 </code></pre></li>
+						<pre><code>$ docker login</code></pre>
+						<pre><code>$ docker push magelle/whalefortune</code></pre>
 					</section>
 				</section>
 				<section>
-					<h1 class="section-title">DockChat</h1>
+					<h1 class="section-title">More containers</h1>
+					<section>
+						<h2>Getting dockchat</h2>
+						<pre><code>$ git clone https://github.com/nicolaka/dockchat.git</code></pre>
+					</section>
 					<section>
 						<h2>Running dockchat</h2>
-						<pre><code>docker run -p 27017:27017 mongo:latest</code></pre>
-						<pre><code>docker run -p 5000:5000 nicolaka/dockchat</code></pre>
+						<pre><code>$ docker run -p 27017:27017 mongo:latest</code></pre>
+						<pre><code>$ docker build -t dockchatweb ./</code></pre>
+						<pre><code>$ docker run -p 5000:5000 -t dockchatweb</code></pre>
 						<p>Go to <a href="http://localhost:5000">http://localhost:5000</a></p>
 					</section>
 				</section>
 				<section>
-					<h2>Docker compose</h2>
-					<ul>
-						<li></li>
-					</ul>
+					<h2>Docker-compose</h2>
+					<h3>Running multi container docker applications</h3>
+				</section>
+				<section>
+					<h2>Running with docker-compose</h2>
+					<pre><code>$ docker-compose build</code></pre>
+					<pre><code>$ docker-compose up -d</code></pre>
+					<p>Go to <a href="http://localhost:5000">http://localhost:5000</a></p>
+				</section>
+				<section>
+					<h2>docker-compose.yml</h2>
+					<pre><code>
+# Mongo DB
+db:
+  image: mongo
+  expose:
+    - 27017
+  command: --smallfiles
+# Python App
+web:
+  build: .
+  ports:
+    - "5000:5000"
+  links:
+   - db:db
+					</code></pre>
 				</section>
 				<section>
 					<h2>Docker swarm</h2>
