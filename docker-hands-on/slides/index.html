@@ -107,7 +107,7 @@ $ docker pull
 				<section>
 					<h1 class="section-title">Writing Dockerfile</h1>
 					<section>
-						<pre><code>FROM</code></pre> Sets the Base Image for subsequent instructions.
+						<pre><code>FROM </code></pre> Sets the Base Image
 						<pre><code>RUN</code></pre> execute a command and create a new layer.
 						<pre><code>CMD</code></pre> provide defaults for an executing container.
 						<pre><code>COPY</code></pre> copies new files or directories to container.
@@ -115,7 +115,6 @@ $ docker pull
 					<section>
 						<pre><code>ENV</code></pre> sets environment variable.
 						<pre><code>EXPOSE</code></pre> expose container port to the outside.
-						<pre><code>ENTRYPOINT</code></pre> executable to run.
 						<pre><code>VOLUME</code></pre> creates a mount point.
 					</section>
 					<section>
@@ -148,9 +147,13 @@ CMD ["cowsay"]
 							<li>Install fortune-mod</li>
 							<li>run fortune | cowsay</li>
 						</ul>
+						<pre><code>$ docker build -t fortunewhale ./</code></pre>
+						<pre><code>$ docker run -t fortunewhale</code></pre>
+						<br/>
+						<pre><code>$ docker run -ti fortunewhale bash</code></pre>
 					</section>
 					<section>
-						<h2>whalefortune dockerfile</h2>
+						<h2>Dockerfile</h2>
 						<pre><code>
 FROM ubuntu:latest
 
@@ -167,31 +170,28 @@ CMD fortune | cowsay
 						</code></pre>
 					</section>
 					<section>
-						<h2>Change the fortunes</h2>
+						<h2>Change the whale</h2>
 						<ul>
-							<li>Go to <a href="https://www.fortunes-fr.org/">https://www.fortunes-fr.org/</a></li>
-							<li>Download a fortune file -> fortune.dat</li>
-							<li>it should go in /usr/share/games/fortunes/</li>
+							<li>cows files should go in /usr/share/cowsay/cows/</li>
 							<li>Modify Dockerfile with VOLUME</li>
 						</ul>
-						<pre><code>docker run -ti whalefortune bash</code></pre>
+						<pre><code>$ docker build -t fortunewhale ./</code></pre>
+						<pre><code>$ docker run -t fortunewhale</code></pre>
+						<br/>
+						<pre><code>$ docker run -ti fortunewhale bash</code></pre>
 					</section>
 					<section>
-						<h2>whalefortune dockerfile</h2>
+						<h2>Dockerfile</h2>
 						<pre><code>
 FROM ubuntu:latest
 
 RUN apt-get update
 RUN apt-get install -y cowsay fortune-mod
-RUN mv /usr/share/cowsay/cows/default.cow /usr/share/cowsay/cows/orig-default.cow
-COPY docker.cow /usr/share/cowsay/cows/
-RUN ln -sv /usr/share/cowsay/cows/docker.cow /usr/share/cowsay/cows/default.cow
 
-RUN rm -rf /var/lib/apt/lists/*
 ENV PATH $PATH:/usr/games
-VOLUME ["/usr/share/games/fortunes/"]
+VOLUME ["/usr/share/cowsay/cows/"]
 
-CMD fortune bd | cowsay
+CMD fortune | cowsay
 						</code></pre>
 					</section>
 					<section>
@@ -233,6 +233,10 @@ CMD fortune bd | cowsay
 						<pre><code>$ docker-compose build</code></pre>
 						<pre><code>$ docker-compose up -d</code></pre>
 						<p>Go to <a href="http://localhost:5000">http://localhost:5000</a></p>
+						<pre><code>$ docker-compose start</code></pre>
+						<pre><code>$ docker-compose stop</code></pre>
+						<pre><code>$ docker-compose logs</code></pre>
+						<pre><code>$ docker-compose rm</code></pre>
 					</section>
 					<section>
 						<h2>docker-compose.yml</h2>
@@ -252,6 +256,42 @@ web:
    - db:db
 						</code></pre>
 					</section>
+					<section>
+						<h2>docker-compose-app</h2>
+						<p>Write your first docker-compose</p>
+						<ul>
+							<li>launch the redis:alpine</li>
+							<li>build the docker-compose-app</li>
+							<li>bind the directory to /code</li>
+							<li>expose port 5000</li>
+							<li>links both containers</li>
+						</ul>
+						<pre><code>$ docker-compose build</code></pre>
+						<pre><code>$ docker-compose up -d</code></pre>
+					</section>
+					<section>
+						<h2>docker-compose.yml</h2>
+						<pre><code>
+redis:
+  image: "redis:alpine"
+web:
+  build: .
+  ports:
+   - "5000:5000"
+  volumes:
+   - .:/code
+  links:
+   - redis:redis
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h1>Other tools</h1>
+					<img src="http://wikibon.com/wp-content/uploads/ClusterUP-containerscape.png"
+						 alt="containers ecosystem">
+				</section>
+				<section>
+					<h1>THE END</h1>
 				</section>
 			</div>
 		</div>

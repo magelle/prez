@@ -1,0 +1,3 @@
+- Use the files in the cows directory to display beautiful cows
+- The cows should go to /usr/share/cowsay/cows/
+- Avoid the need of re building the image when changing the image.
