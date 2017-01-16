@@ -9,4 +9,4 @@ RUN ln -sv /usr/share/cowsay/cows/docker.cow /usr/share/cowsay/cows/default.cow
 RUN rm -rf /var/lib/apt/lists/*
 ENV PATH $PATH:/usr/games
 
-CMD fortune | cowsay
+CMD cowsay
