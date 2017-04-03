@@ -1,0 +1,406 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Refactoring Workshop</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/amundi.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Refactoring Workshop</h2>
+            <h3>Clean code, Tests</h3>
+            <h4>... and legacy code</h4>
+        </section>
+        <section>
+            <h2>Disclaimer</h2>
+            <blockquote>Dur avec le code, doux avec les gens</blockquote>
+        </section>
+        <section>
+            <h1>Summary</h1>
+            <ul>
+                <li class="fragment fade-up">What is clean code ?
+                    <ul class="fragment fade-out">
+                        <li>The Good, the bad and the ugly</li>
+                        <li>Why my code is STUPID ?</li>
+                        <li>How to make it SOLID ?</li>
+                    </ul>
+                </li>
+                <li class="fragment fade-up">How to get it from legacy ?
+                    <ul class="fragment fade-out">
+                        <li>Most common problems</li>
+                    </ul>
+                </li>
+                <li class="fragment fade-up">Workout !</li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>The Good,<br/>the bad<br/>and the ugly</h2>
+            </section>
+            <section>
+                    <pre><code>
+public void update() {
+        for (int i = 0; i < items.length; i++) {
+            if (!items[i].name.equals("Aged Brie")
+                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (items[i].quality > 0) {
+                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                        items[i].quality = items[i].quality - 1;
+                    }
+                }
+            } else {
+                if (items[i].quality < 50) {
+                    items[i].quality = items[i].quality + 1;
+
+                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        if (items[i].sellIn < 11) {
+                            if (items[i].quality < 50) {
+                                items[i].quality = items[i].quality + 1;
+                            }
+                        }
+
+                        if (items[i].sellIn < 6) {
+                            if (items[i].quality < 50) {
+                                items[i].quality = items[i].quality + 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                items[i].sellIn = items[i].sellIn - 1;
+            }
+
+            if (items[i].sellIn < 0) {
+                if (!items[i].name.equals("Aged Brie")) {
+                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        if (items[i].quality > 0) {
+                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                                items[i].quality = items[i].quality - 1;
+                            }
+                        }
+                    } else {
+                        items[i].quality = items[i].quality - items[i].quality;
+                    }
+                } else {
+                    if (items[i].quality < 50) {
+                        items[i].quality = items[i].quality + 1;
+                    }
+                }
+            }
+        }
+    }
+}
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>My code is STUPID</h2>
+            </section>
+            <section>
+                <h3>STUPID ?</h3>
+                <ul>
+                    <li><strong>S</strong><span class="fragment fade-in">ingleton</span></li>
+                    <li><strong>T</strong><span class="fragment fade-in">ight Couplig</span></li>
+                    <li><strong>U</strong><span class="fragment fade-in">ntestable</span></li>
+                    <li><strong>P</strong><span class="fragment fade-in">remature Optimization</span></li>
+                    <li><strong>I</strong><span class="fragment fade-in">ndescriptive Naming</span></li>
+                    <li><strong>D</strong><span class="fragment fade-in">uplication</span></li>
+                </ul>
+            </section>
+            <section>
+                <h3>Singleton</h3>
+                <ul>
+                    <li class="fragment fade-in">Global state</li>
+                    <li class="fragment fade-in">Tight coupling</li>
+                </ul>
+                <aside class="notes">
+                    Variable globale?<br/> Besoin ?<br/> Exemple valable : pool de connexions ?
+                </aside>
+            </section>
+            <section>
+                <h3>Tight Coupling</h3>
+                <ul>
+                    <li class="fragment fade-in">Hard refactoring</li>
+                    <li class="fragment fade-in">Low reusability</li>
+                    <li class="fragment fade-in">Hard to test</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Untestable</h3>
+                <ul>
+                    <li class="fragment fade-in">Hard to test</li>
+                    <li class="fragment fade-in">Almost sur it works</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Premature Optimization</h3>
+                <ul>
+                    <li class="fragment fade-in">High cost</li>
+                    <li class="fragment fade-in">Low benefit</li>
+                    <li class="fragment fade-in">Is-it really more effective ?</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Indescriptive Naming</h3>
+                <ul>
+                    <li class="fragment fade-in">WTF is this ?</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Duplication</h3>
+                <ul>
+                    <li class="fragment fade-in">Copy - paste</li>
+                    <li class="fragment fade-in">DRY</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Make it SOLID</h3>
+            </section>
+            <section>
+                <h3>SOLID ?</h3>
+                <ul>
+                    <li><strong>S</strong><span class="fragment fade-in">ingle responsibility principle</span></li>
+                    <li><strong>O</strong><span class="fragment fade-in">pen/close principle</span></li>
+                    <li><strong>L</strong><span class="fragment fade-in">iskov substitution</span></li>
+                    <li><strong>I</strong><span class="fragment fade-in">nterface segregation</span></li>
+                    <li><strong>D</strong><span class="fragment fade-in">ependency Inversion Principle</span></li>
+                </ul>
+            </section>
+            <section>
+                <h3>Single Responsibility Principle</h3>
+                <ul>
+                    <li class="fragment fade-in">God classes</li>
+                    <li class="fragment fade-in">On reason to change</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Open/Close Principle</h3>
+                <ul>
+                    <li class="fragment fade-in">Open for extension</li>
+                    <li class="fragment fade-in">Close for modification</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Liskov Substitution</h3>
+                <ul>
+                    <li class="fragment fade-in">A type should be replaceable by any subtype</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Interface Segregation Principle</h3>
+                <ul>
+                    <li class="fragment fade-in">Client specific</li>
+                    <li class="fragment fade-in">low coupling - high cohesion</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Dependency Inversion Principle</h3>
+                <ul>
+                    <li class="fragment fade-in">Abstractions should not depends upon details</li>
+                    <li class="fragment fade-in">Details should depend upon abstractions</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <h3>KISS</h3>
+            <h4>Keep it simple stupid</h4>
+            <ul>
+                <li class="fragment fade-in">Simpler code</li>
+                <li class="fragment fade-in">Easier reading</li>
+                <li class="fragment fade-in">Easier maintaining</li>
+                <li class="fragment fade-in">More reusable</li>
+            </ul>
+        </section>
+        <section>
+            <h4>We write code for human <br/>not for machine</h4>
+        </section>
+        <section>
+            <section>
+                <h3>Examples</h3>
+                <ul>
+                    <li class="fragment fade-in">getInstance</li>
+                    <li class="fragment fade-in">heritage and reuse</li>
+                    <li class="fragment fade-in">Big methods / classes</li>
+                    <li class="fragment fade-in">Multiple responsibilities</li>
+                </ul>
+            </section>
+            <section>
+                <h3>getInstance</h3>
+                <pre><code>
+if (mode == MONTHLY_MODE) {
+    putSameCompositePtfs(date, ServicesMgr.getInstance()
+                   .getExternalPerfService()
+                   .getPtfByAIMRCompo(date, mode, getComposite()));
+}
+                </code></pre>
+                <aside class="notes">
+                    Tests compliqués<br/>
+                    Pas d'interface
+                </aside>
+            </section>
+            <section>
+                <h3>Heritage and reuse</h3>
+                <ul>
+                    <li class="fragment fade-in">Favor composition over inheritance</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Big methods / classes</h3>
+                <ul>
+                    <li class="fragment fade-in">A comment</li>
+                    <li class="fragment fade-in">New method or class</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Multiple responsibilities</h3>
+                <pre><code>
+con = Resources.DECLIC_DS.getConnection();
+ps = con.prepareStatement(SQL_INIT_BENCH);
+rs = ps.executeQuery();
+
+while (rs.next()) {
+    Set&lt;Portfolio&gt; ptfList = ptfMap.get(rs.getString("codeport"));
+    if (ptfList != null) {
+        for (Iterator&lt;Portfolio&gt; iterator = ptfList.iterator(); iterator.hasNext();) {
+            Portfolio portfolio = iterator.next();
+
+            BenchmarkShell benchmarkShell = getBenchmark(rs.getInt("idindice"));
+
+            if (benchmarkShell != null) {
+                if (benchmarkShell.getTypeIndice() != null) {
+                    benchmarkShell = new BenchmarkShell(benchmarkShell);
+                }
+            } else if (rs.getString("typeindice").contains(BenchmarkShell.BENCH_TYPE_SRRI) && -1 == rs.getInt("idindice")) {
+                // Si le bench SRRI est un portefeuille
+                benchmarkShell = new BenchmarkShell();
+                String codeIndiceSf = rs.getString("codeindicesf");
+                benchmarkShell.setCodeIndiceSf(codeIndiceSf);
+                benchmarkShell.setIdIndice(-1);
+
+                String[] codes = codeIndiceSf.split("#");
+                if (codes != null && codes.length == 2) {
+                    Portfolio benchPtf = null;
+                    Set&lt;Portfolio&gt; benchPtfList = ptfMap.get(codes[0]);
+                    if (benchPtfList != null) {
+                        for (Iterator&lt;Portfolio&gt; it = benchPtfList.iterator(); it.hasNext();) {
+                            Portfolio benchPortfolio = it.next();
+                            if (benchPortfolio.getCodetypepart().equalsIgnoreCase(codes[1]))
+                                benchPtf = benchPortfolio;
+                        }
+                    }
+
+                    if (benchPtf != null) {
+                        benchmarkShell.setDevise(benchPtf.getDevise());
+                        benchmarkShell.setNomIndice(benchPtf.getLibPortReporting());
+                    }
+                }
+            }
+
+            if (benchmarkShell != null) {
+                benchmarkShell.setTypeIndice(rs.getString("typeindice"));
+                benchmarkShell.setDateModif(rs.getTimestamp("datemodif"));
+                portfolio.addBenchmark(rs.getString("typeindice"), benchmarkShell);
+            }
+        }
+    }
+}
+} catch (SQLException e) {
+    throw new RamboSqlException("Cannot get Benchmark for all Portfolios ", e);
+}
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Tests</h1>
+            </section>
+            <section>
+                <h3>Tests, why ?</h3>
+            </section>
+            <section>
+                <h3>Tests, why not ?</h3>
+            </section>
+        </section>
+        <section>
+            <h2>Live coding</h2>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [{
+            src: 'plugin/markdown/marked.js'
+        }, {
+            src: 'plugin/markdown/markdown.js'
+        }, {
+            src: 'plugin/notes/notes.js',
+            async: true
+        }, {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+        }]
+    });
+</script>
+</body>
+
+</html>
+<!-- 
+	En PJ le compte rendu de la réunion : 
+-	Objectif : organiser un atelier autour du clean code / refactoring du legacy
+-	Temps disponible : ½ journée
+-	Organisation : 5 binômes environ
+-	Lieu : Salles de formations au rez-de-chaussée
+-	Problèmes fréquemment rencontrés :
+o	getInstance() et méthodes static en général
+o	héritage pour faire de la réutilisation
+o	méthodes longues et complexe
+o	multiple responsabilités
+o	Test unitaires
+-	Déroulement prévu
+o	1h : présentation S.O.L.I.D
+o	30min : live coding : résoudre les problèmes fréquemment rencontrés
+o	2h30 : coding kata -> base de code à préparer
+-	Date prévue : le 21 avril
+
+Actions :
+-	Réserver une salle de formation avec PC
+-	Préparer une base de code à refactorer
+-	Préparer une présentation de S.O.L.I.D
+
+-->
