@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Docker hands-on</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/novencia.css">
@@ -30,12 +30,12 @@
 					<img src="https://www.docker.com/sites/default/files/moby.svg" height="400"/>
 				</section>
 				<section>
-					<h2>Déroulement</h2>
+					<h2>Summary</h2>
 					<ul>
 						<li>Docker basics</li>
-						<li>Docker commands</li>
 						<li>writing Dockerfile</li>
-						<li>Tools</li>
+						<li>Docker-compose</li>
+						<li>Other tools</li>
 					</ul>
 				</section>
 				<section>
@@ -47,6 +47,8 @@
 							<li>A toolbox</li>
 							<li>Build on linux</li>
 						</ul>
+						<img src="http://gordonsun-blog.s3.amazonaws.com/wp-content/uploads/2015/05/docker-containers-vs-vms.png"
+							 alt="container vs vitual machine" />
 					</section>
 					<section>
 						<h2>Under the hood</h2>
@@ -65,6 +67,10 @@
 						</ul>
 					</section>
 					<section>
+						<h2>Docker Architecture</h2>
+						<img src="https://docs.docker.com/engine/article-img/architecture.svg" alt="docker architecture"/>
+					</section>
+					<section>
 						<h2>Docker words</h2>
 						<ul>
 							<li>Image</li>
@@ -73,15 +79,14 @@
 						</ul>
 					</section>
 					<section>
-						<img src="https://docs.docker.com/engine/article-img/architecture.svg" alt="docker architecture"/>
-					</section>
-					<section>
+						<h2>Docker layers</h2>
 						<img src="https://github.com/docker/dceu_tutorials/raw/master/images/container-layers.jpg" alt="docker layers"/>
 					</section>
 				</section>
 				<section>
 					<h2>Install docker</h2>
-					<pre><code>apt-get install docker.io</code></pre>
+					<pre><code>$ sudo apt-get install docker.io</code></pre>
+					<pre><code>$ sudo apt-get install git</code></pre>
 				</section>
 				<section>
 					<h1 class="section-title">Commands</h1>
@@ -99,15 +104,25 @@ $ docker pull
 					</section>
 					<section>
 						<h2>Let's try it</h2>
-						<pre><code>
-$ docker run docker/whalesay cowsay boo
-$ docker run docker/whalesay watch cowsay boo
-						</code></pre>
-						<span class="speaker-notes">Run cowsay with fortune from network ?</span>
+						<pre><code>$ docker run docker/whalesay cowsay boo</code></pre>
 					</section>
 				</section>
 				<section>
 					<h1 class="section-title">Writing Dockerfile</h1>
+					<section>
+						<pre><code>FROM </code></pre> Sets the Base Image
+						<pre><code>RUN</code></pre> execute a command and create a new layer.
+						<pre><code>CMD</code></pre> provide defaults for an executing container.
+						<pre><code>COPY</code></pre> copies new files or directories to container.
+					</section>
+					<section>
+						<pre><code>ENV</code></pre> sets environment variable.
+						<pre><code>EXPOSE</code></pre> expose container port to the outside.
+						<pre><code>VOLUME</code></pre> creates a mount point.
+					</section>
+					<section>
+						<a href="https://github.com/wsargent/docker-cheat-sheet">https://github.com/wsargent/docker-cheat-sheet</a>
+					</section>
 					<section>
 						<h2>whalesay Dockerfile</h2>
 						<pre><code>
@@ -128,18 +143,158 @@ RUN ln -sv /usr/share/cowsay/cows/docker.cow /usr/share/cowsay/cows/default.cow
 CMD ["cowsay"]
 						</code></pre>
 					</section>
+					<section>
+						<h2>Your mission</h2>
+						<p>Get the whale say fortunes</p>
+						<ul>
+							<li>Install fortune-mod</li>
+							<li>run fortune | cowsay</li>
+						</ul>
+						<pre><code>$ docker build -t fortunewhale ./</code></pre>
+						<pre><code>$ docker run -t fortunewhale</code></pre>
+						<br/>
+						<pre><code>$ docker run -ti fortunewhale bash</code></pre>
+					</section>
+					<section>
+						<h2>Dockerfile</h2>
+						<pre><code>
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install -y cowsay fortune-mod
+RUN mv /usr/share/cowsay/cows/default.cow /usr/share/cowsay/cows/orig-default.cow
+COPY docker.cow /usr/share/cowsay/cows/
+RUN ln -sv /usr/share/cowsay/cows/docker.cow /usr/share/cowsay/cows/default.cow
+
+RUN rm -rf /var/lib/apt/lists/*
+ENV PATH $PATH:/usr/games
+
+CMD fortune | cowsay
+						</code></pre>
+					</section>
+					<section>
+						<h2>Change the whale</h2>
+						<ul>
+							<li>cows files should go in /usr/share/cowsay/cows/</li>
+							<li>Modify Dockerfile with VOLUME</li>
+						</ul>
+						<pre><code>$ docker build -t fortunewhale ./</code></pre>
+						<pre><code>$ docker run -v [source]:[dest] -t fortunewhale</code></pre>
+						<br/>
+						<pre><code>$ docker run -ti fortunewhale bash</code></pre>
+					</section>
+					<section>
+						<h2>Dockerfile</h2>
+						<pre><code>
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install -y cowsay fortune-mod
+
+ENV PATH $PATH:/usr/games
+VOLUME ["/usr/share/cowsay/cows/"]
+
+CMD fortune | cowsay
+						</code></pre>
+					</section>
+					<section>
+						<h2>Publish it on dockerhub</h2>
+						<ul>
+							<li>Create your account</li>
+							<li>Create a repository</li>
+						</ul>
+						<pre><code>$ docker tag magelle/whalefortune magelle/whalefortune:1.0.0 </code></pre></li>
+						<pre><code>$ docker login</code></pre>
+						<pre><code>$ docker push magelle/whalefortune</code></pre>
+					</section>
 				</section>
 				<section>
-					<h2>Docker compose</h2>
-					<ul>
-						<li></li>
-					</ul>
+					<h1 class="section-title">More containers</h1>
+					<section>
+						<h2>Getting dockchat</h2>
+						<pre><code>$ git clone https://github.com/nicolaka/dockchat.git</code></pre>
+					</section>
+					<section>
+						<h2>Running dockchat</h2>
+						<pre><code>$ docker run --name db mongo</code></pre>
+						<pre><code>$ docker build -t dockchatweb ./</code></pre>
+						<pre><code>$ docker run --name web --link db:mongo -p 5000:5000 -t dockchatweb</code></pre>
+						<p>Go to <a href="http://localhost:5000">http://localhost:5000</a></p>
+					</section>
+					<section>
+						<h2>Docker-compose</h2>
+						<h3>Running multi container docker applications</h3>
+						<pre><code>$ sudo apt-get install docker-compose</code></pre>
+					</section>
+					<section>
+						<h2>Docs</h2>
+						<a href="https://docs.docker.com/compose/compose-file/">https://docs.docker.com/compose/compose-file/</a>
+						<a href="https://docs.docker.com/compose/reference/">https://docs.docker.com/compose/reference/</a>
+					</section>
+					<section>
+						<h2>Running with docker-compose</h2>
+						<pre><code>$ docker-compose build</code></pre>
+						<pre><code>$ docker-compose up -d</code></pre>
+						<p>Go to <a href="http://localhost:5000">http://localhost:5000</a></p>
+						<pre><code>$ docker-compose start</code></pre>
+						<pre><code>$ docker-compose stop</code></pre>
+						<pre><code>$ docker-compose logs</code></pre>
+						<pre><code>$ docker-compose rm</code></pre>
+					</section>
+					<section>
+						<h2>docker-compose.yml</h2>
+						<pre><code>
+# Mongo DB
+db:
+  image: mongo
+  expose:
+	- 27017
+  command: --smallfiles
+# Python App
+web:
+  build: .
+  ports:
+	- "5000:5000"
+  links:
+   - db:db
+						</code></pre>
+					</section>
+					<section>
+						<h2>docker-compose-app</h2>
+						<p>Write your first docker-compose</p>
+						<ul>
+							<li>launch the redis:alpine</li>
+							<li>build the docker-compose-app</li>
+							<li>bind the directory to /code</li>
+							<li>expose port 5000</li>
+							<li>links both containers</li>
+						</ul>
+						<pre><code>$ docker-compose build</code></pre>
+						<pre><code>$ docker-compose up -d</code></pre>
+					</section>
+					<section>
+						<h2>docker-compose.yml</h2>
+						<pre><code>
+redis:
+  image: "redis:alpine"
+web:
+  build: .
+  ports:
+   - "5000:5000"
+  volumes:
+   - .:/code
+  links:
+   - redis:redis
+						</code></pre>
+					</section>
 				</section>
 				<section>
-					<h2>Docker swarm</h2>
-					<ul>
-						<li>https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md</li>
-					</ul>
+					<h1>Other tools</h1>
+					<img src="http://wikibon.com/wp-content/uploads/ClusterUP-containerscape.png"
+						 alt="containers ecosystem">
+				</section>
+				<section>
+					<h1>THE END</h1>
 				</section>
 			</div>
 		</div>
