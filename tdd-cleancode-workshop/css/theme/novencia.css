@@ -391,3 +391,15 @@ body {
 .reveal .controls .navigate-down.enabled:hover {
     border-top-color: #ff80d0;
 }
+
+b.red {
+    color: red;
+}
+
+b.green {
+    color: green;
+}
+
+b.blue {
+    color: blue;
+}
