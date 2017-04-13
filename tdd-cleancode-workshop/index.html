@@ -28,7 +28,6 @@
     <div class="slides">
         <section>
             <h2>Test Driven Development</h2>
-            <h2>Clean code</h2>
             <h3>Novencia</h3>
         </section>
         <section>
@@ -219,9 +218,281 @@
             <section>
                 <h2>Clean code</h2>
                 <h3 class="fragment fade-in">Legacy code</h3>
+                <aside class="notes">
+                    Clean code implique code non clean -> le code legacy
+                </aside>
             </section>
             <section>
-                
+                <h2>Clean code, c'est quoi ?</h2>
+                <ul class="fragment fade-in">
+                    <li>Un livre de Robert C. Martin</li>
+                    <li>Maintenable</li>
+                    <li>Expressif</li>
+                    <li>Testable / Testé</li>
+                    <li>Faible complexité</li>
+                    <li>...</li>
+                </ul>
+                <aside class="notes">
+                    C'est quoi le clean code pour vous ?
+                </aside>
+            </section>
+            <section>
+                <h2>Pourquoi faire du clean code ?</h2>
+                <ul class="fragment fade-in">
+                    <li>Allez plus vite</li>
+                    <li>Augmenter la productivité</li>
+                    <li>Avoir une application plus fiable</li>
+                    <li>Bien / Mieux faire</li>
+                </ul>
+                <aside class="notes">
+                    Pourquoi faire du clean code ?
+                </aside>
+            </section>
+            <section>
+                <h2>Comment faire du clean code ?</h2>
+                <ul class="fragment fade-in">
+                    <li>Des principes</li>
+                    <li>Des pratiques</li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Des principes à "essayer" d'appliquer, parfois pas très parlant</li>
+                        <li>Des pratiques à adopter</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Des principes</h2>
+                <ul>
+                    <li>KISS</li>
+                    <li>DRY</li>
+                    <li>YAGNI</li>
+                    <li>SLAP</li>
+                    <li>SOLID</li>
+                    <li>...</li>
+                </ul>
+            </section>
+            <section>
+                <h2>KISS</h2>
+                <p>Keep It Simple Stupid</p>
+                <aside class="notes">
+                    <ul>
+                        <li>Garder les choses simples</li>
+                        <li>Lisible</li>
+                        <li>Maintenable</li>
+                        <li>Testable</li>
+                        <li>...</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>DRY</h2>
+                <p>Don't repeat yourself</p>
+                <aside class="notes">
+                    <ul>
+                        <li>Ne vous répétez pas</li>
+                        <li><b>/!\</b> Attention : peut provoquer une sur factorisation</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>YAGNI</h2>
+                <p>You Ain't Gonna Need It</p>
+                <aside class="notes">
+                    <ul>
+                        <li>code évolutif</li>
+                        <li>ne pas anticiper les évolutions</li>
+                        <li>anticipation <ul>
+                            <li>plus de complexité</li>
+                            <li>code mort</li>
+                            <li>mauvaise anticipation</li>
+                            <li>code legacy</li>
+                        </ul></li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>SLAP</h2>
+                <p>Single Layer Abstraction Principle</p>
+                <aside class="notes">
+                    <ul>
+                        <li>Je ne vois qu'une couche</li>
+                        <li>pas de métier dans les DAO</li>
+                        <li>+ réutilisabilité</li>
+                        <li>+ testable</li>
+                        <li>+ lisible</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>SOLID</h2>
+                <ul>
+                    <li><b>S</b>ingle responsibility principle</li>
+                    <li><b>O</b>pen close principle</li>
+                    <li><b>L</b>iskov substitution</li>
+                    <li><b>I</b>nterface segregation</li>
+                    <li><b>D</b>ependency inversion</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Single Responsability Principle</h2>
+                <pre class="fragment fade-in"><code>
+public void sendGreetings(String fileName, XDate xDate,
+                          String smtpHost, int smtpPort)
+                    throws IOException, ParseException,
+                           AddressException, MessagingException {
+
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = "";
+    str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+        // parse line
+        String[] employeeData = str.split(", ");
+        Employee employee = new Employee(employeeData[1], employeeData[0],
+                                         employeeData[2], employeeData[3]);
+        if (employee.isBirthday(xDate)) {
+            // Send mail
+            String recipient = employee.getEmail();
+            String body = "Happy Birthday, dear %NAME%"
+                            .replace("%NAME%", employee.getFirstName());
+            String subject = "Happy Birthday!";
+            sendMessage(smtpHost, smtpPort, "sender@here.com",
+                        subject, body, recipient);
+        }
+    }
+}
+                </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li>parsing fichier</li>
+                        <li>Envoie mail</li>
+                        <li>Création mail</li>
+                        <li>filtre des employé</li>
+                        <li>Je ne peux rien réutiliser</li>
+                        <li>Je devrais dupliquer</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Open / close principle</h2>
+                <pre class="fragment fade-in"><code>
+public double Area(Object[] shapes) {
+    double area = 0;
+    foreach (Shape shape : shapes) {
+        if (shape instanceof Rectangle) {
+            Rectangle rectangle = (Rectangle) shape;
+            area += rectangle.getWidth() * rectangle.getHeight();
+        }
+        else {
+            Circle circle = (Circle) shape;
+            area += circle.getRadius() * circle.getRadius() * Math.PI;
+        }
+    }
+    return area;
+}
+                </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li>obligé de modifier pour ajouter une forme</li>
+                        <li>je vais oublier</li>
+                        <li>je n'aurais pas d'erreur si j'oublie</li>
+                        <li>parsing fichier</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Liskov substitution</h2>
+                <pre class="fragment fade-in"><code>
+public class Rectangle {
+    private int width;
+    private int height;
+    public void setWidth(int width) { this.width = width; }
+    public void setHeight(int height) { this.height = height; }
+}
+
+public class Carre extends rectangle {
+    private int side;
+    public void setWidth(int width) { this.side = width; }
+    public void setHeight(int height) { this.side = height; }
+}
+
+rectange.setHeight(4);
+rectange.setHeight(5);
+                </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li>une implementation doit être remplacable par n'importe quel implémentation</li>
+                        <li>ex : HashMap, TreeMap</li>
+                        <li>interface = contrat</li>
+                        <li>ici : carré etend de rectangle</li>
+                        <li>mais carré n'a qu'une donnée side</li>
+                        <li>carré ne respecte pas le contrat de rectangle</li>
+                        <li>provoque des comportements étrange</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Interface segregation</h2>
+                <pre class="fragment fade-in"><code>
+
+                </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li></li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Dependency inversion</h2>
+                <pre class="fragment fade-in"><code>
+
+                </code></pre>
+                <aside class="notes">
+                    <ul>
+                        <li></li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Des pratiques</h2>
+                <ul>
+                    <li>Code review</li>
+                    <li>Pair programming</li>
+                    <li>Extreme programming</li>
+                    <li>Unit testing</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Mais dans la vrai vie ?</h2>
+            </section>
+            <section>
+                <h2>Des noms éloquents</h2>
+            </section>
+            <section>
+                <h2>Des petites méthodes</h2>
+            </section>
+            <section>
+                <h2>Des classes cohérentes</h2>
+            </section>
+            <section>
+                <h2>Aux niveaux supperieurs</h2>
+                <ul>
+                    <li>Architecture hexagonale</li>
+                    <li>DDD</li>
+                    <li>...</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Pro Tips !</h2>
+                <p>Use IDE tools</p>
+            </section>
+            <section>
+                <h2>Un Mindset</h2>
+                <blockquote>Comment puis-je rendre ce code meilleur ?</blockquote>
+                <p>Vous, demain</p>
+            </section>
+            <section>
+                <h2></h2>
             </section>
         </section>
     </div>
