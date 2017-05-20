@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>TDD / Clean code</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/novencia.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Test Driven Development</h2>
+            <h3>Novencia</h3>
+        </section>
+        <section>
+            <h2>Test Driven Development</h2>
+            <aside class="fragment fade-in">
+                TDD c'est quoi pour vous ?
+            </aside>
+        </section>
+        <section>
+            <blockquote>
+              Test Driven-Development: <br/>Clean code that works.
+            </blockquote>
+            Ron Jeffries
+            <aside class="notes">
+                <ul>
+                    <li>1 des trois fondateur de XP</li>
+                    <li>Signataire manifest Agile</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+          <h2>TDD, Pourquoi ?</h2>
+          <ul>
+              <li class="fragment fade-in">Tests first</li>
+              <li class="fragment fade-in">Confiance</li>
+              <li class="fragment fade-in">Documentation</li>
+              <li class="fragment fade-in">Design</li>
+              <li class="fragment fade-in">Expérimentation</li>
+              <li class="fragment fade-in">Harnais de sécurité</li>
+              <li class="fragment fade-in">Guide</li>
+          </ul>
+          <aside class="notes">
+              <ul>
+                  <li>Test firsts : Reflection autour du test -> autour de la fonctionnalité</li>
+                  <li>Confiance : dans le code écrit</li>
+                  <li>Documentation : comment ça fonctionne</li>
+                  <li>Design : Test compliqué -> design adapté ?</li>
+                  <li>Expérimentation : comment ça réagi si -> nouveau test</li>
+                  <li>Harnais : exécuté à la compilation -> je sais si ça explose</li>
+                  <li>Guide : laissez-vous guider</li>
+              </ul>
+          </aside>
+        </section>
+        <section>
+            <h2>Test cycle</h2>
+            <img src="images/red-green-refactor.png" alt="red green refactor schemas" />
+            <aside class="notes">
+                <ul>
+                    <li>Red : Ecrire un test rouge (<b>je l'exécute</b>) -> il teste quelque chose</li>
+                    <li>Green : Faire passer ce test <b>uniquement</b> le plus vite possible</li>
+                    <li>Refactor : clean it, le test aussi</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>Test cycle</h2>
+            <img src="images/precise-red-green-refactor.png" alt="red green refactor - a more precise schemas" />
+        </section>
+        <section>
+            <h2>Structure d'un test</h2>
+            <pre><code class="java">
+public void add_should_sum_several_numbers() {
+    // Given
+    Calculator calculator = new Calculator();
+
+    // When
+    calculator.add(2);
+    calculator.add(4);
+
+    // Then
+    assertThat(calculator.result()).isEqualTo(6);
+}
+            </code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>Given : Etat initial</li>
+                    <li>When : Ce que l'on teste</li>
+                    <li>Then : Vérifications</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>Un bon test</h2>
+            <ul>
+                <li><b>F</b><span class="fragment fade-in">ast</span></li>
+                <li><b>I</b><span class="fragment fade-in">solated</span></li>
+                <li><b>R</b><span class="fragment fade-in">epeatable</span></li>
+                <li><b>S</b><span class="fragment fade-in">elf-checking</span></li>
+                <li><b>T</b><span class="fragment fade-in">imely</span></li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Fast : je peux l'éxecuter souvent</li>
+                    <li>Isolated : Pas de dépendances</li>
+                    <li>Repeatable : On lance N fois -> même résultat</li>
+                    <li>Self-checking : Rouge ou vert, sans intervention humaine</li>
+                    <li>Timely : Ecrit en même temps que le code</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>Black vs White box</h2>
+            <p>Attention à la maintenabilité</p>
+        </section>
+        <section>
+            <h2>Gestion des tests</h2>
+            <p>Quand ?</p>
+            <ul>
+                <li>Ecrire un test</li>
+                <li>Supprimer un test</li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Ecrire un test -> avant tout code de prod, pour corriger un bug, pour tester</li>
+                    <li>Supprimer une test -> Redondances, sauf si cela baisse votre confiance</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>Outils de tests</h2>
+            <p>Mock, Spy, Stubs, Fake</p>
+            <p class="fragment fade-in">Librairies : Mockito, NSubstitute</p>
+            <aside class="notes">
+                <ul>
+                    <li>Mock : Je définie le comportement
+                        <ul>
+                            <li>Dépendance complexe</li>
+                            <li>Partial mock</li>
+                        </ul>
+                    </li>
+                    <li>Spy : Je regarde quelle fct est appelée
+                        <ul>
+                            <li>appel DAO</li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>Code legacy</h2>
+            <ul>
+                <li>Créer une couverture de tests</li>
+                <li>Utiliser les outils de l'IDE</li>
+                <li>Micro steps</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Resources</h2>
+            <ul>
+                <li>Growing OO software guided by tests</li>
+                <li>Test Driven Development: By Example</li>
+                <li>The art of Unit Testing, second edition</li>
+                <li><a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks aren't Stubs</a></li>
+                <li><a href="https://www.youtube.com/watch?v=XHnuMjah6ps">Outside in TDD : live coding</a></li>
+                <li><a href="https://www.youtube.com/watch?v=_NnElPO5BU0">Testing and Refactoring Legacy Code</a></li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>Growing object-oriented software guided by tests -> Steve Freeman</li>
+                    <li>Test Driven Development: By Example -> Kent Beck, surtout le début</li>
+                    <li>The art of Unit Testing -> Roy Osherove</li>
+                    <li>Mocks aren't stubs : martin fowler</li>
+                    <li>Outside in TDD -> Sandro mancuso</li>
+                    <li>Testing and Refactoring Legacy Code -> Sandro mancuso</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>Aller plus loin</h2>
+            <ul>
+                <li>Mutation testing</li>
+                <li>ATTD : Acceptance Test Driven Development</li>
+                <li>BDD : Behavior Driven Development</li>
+                <li>Pyramide des Test</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Différentes écoles</h2>
+            <ul>
+                <li>Classic
+                    <ul>
+                        <li>Inside out</li>
+                        <li>Bottom up</li>
+                    </ul>
+                </li>
+                <br/>
+                <li>Mockist
+                    <ul>
+                        <li>Outside in</li>
+                        <li>Top down</li>
+                    </ul>
+                </li>
+            </ul>
+            <aside class="notes">
+                Deux écoles
+                <ul>
+                    <li>Classic : design first, commence par petites briques puis agrégation</li>
+                    <li>Mockist : on mock tout, on commence par la big picture</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h1>Let's go</h1>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [{
+            src: 'plugin/markdown/marked.js'
+        }, {
+            src: 'plugin/markdown/markdown.js'
+        }, {
+            src: 'plugin/notes/notes.js',
+            async: true
+        }, {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+        }]
+    });
+</script>
+</body>
+
+</html>
