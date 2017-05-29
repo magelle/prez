@@ -27,7 +27,7 @@
 <div class="reveal">
     <div class="slides">
         <section>
-            <h2>Refactoring Workshop</h2>
+            <h2>Atelier Refactoring</h2>
             <h3>Clean code, Tests</h3>
             <h4>... and legacy code</h4>
         </section>
@@ -38,19 +38,19 @@
         <section>
             <h1>Summary</h1>
             <ul>
-                <li class="fragment fade-up">What is clean code ?
+                <li class="fragment fade-up">Clean code, c&#39;est quoi ?
                     <ul class="fragment fade-out">
                         <li>The Good, the bad and the ugly</li>
-                        <li>Why my code is STUPID ?</li>
-                        <li>How to make it SOLID ?</li>
+                        <li>Pourquoi mon code est STUPID ?</li>
+                        <li>Comment de rendre SOLID ?</li>
                     </ul>
                 </li>
-                <li class="fragment fade-up">How to get it from legacy ?
+                <li class="fragment fade-up">Travailler sur du legacy ?
                     <ul class="fragment fade-out">
-                        <li>Most common problems</li>
+                        <li>Problèmes fréquents</li>
                     </ul>
                 </li>
-                <li class="fragment fade-up">Workout !</li>
+                <li class="fragment fade-up">Atelier !</li>
             </ul>
         </section>
         <section>
@@ -117,7 +117,7 @@ public void update() {
         </section>
         <section>
             <section>
-                <h2>My code is STUPID</h2>
+                <h2>Mon code est STUPID</h2>
             </section>
             <section>
                 <h3>STUPID ?</h3>
@@ -133,53 +133,76 @@ public void update() {
             <section>
                 <h3>Singleton</h3>
                 <ul>
-                    <li class="fragment fade-in">Global state</li>
-                    <li class="fragment fade-in">Tight coupling</li>
+                    <li class="fragment fade-in">Etat global</li>
+                    <li class="fragment fade-in">Couplage fort</li>
                 </ul>
                 <aside class="notes">
-                    Variable globale?<br/> Besoin ?<br/> Exemple valable : pool de connexions ?
+                    Variable globale?<br/> Besoin ?<br/> Exemple valable ?
                 </aside>
             </section>
             <section>
                 <h3>Tight Coupling</h3>
+                <h4>Couplage fort</h4>
                 <ul>
-                    <li class="fragment fade-in">Hard refactoring</li>
-                    <li class="fragment fade-in">Low reusability</li>
-                    <li class="fragment fade-in">Hard to test</li>
+                    <li class="fragment fade-in">Refactoring difficile</li>
+                    <li class="fragment fade-in">Réutilisabilité faible</li>
+                    <li class="fragment fade-in">Difficile à tester</li>
                 </ul>
+                <aside class="notes">
+                    Deux classes imbriquées<br/>
+                </aside>
             </section>
             <section>
                 <h3>Untestable</h3>
+                <h4>Non testable</h4>
                 <ul>
-                    <li class="fragment fade-in">Hard to test</li>
-                    <li class="fragment fade-in">Almost sur it works</li>
+                    <li class="fragment fade-in">Comment être sûr que ça fonctionne ?</li>
                 </ul>
+                <aside class="notes">
+                    Au moment du dev<br/>
+                    En cas de modification
+                </aside>
             </section>
             <section>
                 <h3>Premature Optimization</h3>
+                <h4>Optimisation prématurée</h4>
                 <ul>
-                    <li class="fragment fade-in">High cost</li>
-                    <li class="fragment fade-in">Low benefit</li>
-                    <li class="fragment fade-in">Is-it really more effective ?</li>
+                    <li class="fragment fade-in">Coût important</li>
+                    <li class="fragment fade-in">Bénéfice faible</li>
+                    <li class="fragment fade-in">Est-ce réellement efficace ?</li>
                 </ul>
+                <aside class="notes">
+                    exemple : cache</br>
+                    complexification<br/>
+                    Ai-je mesuré avant, après ?
+                </aside>
             </section>
             <section>
                 <h3>Indescriptive Naming</h3>
+                <h4>Noms dénués de sens</h4>
                 <ul>
-                    <li class="fragment fade-in">WTF is this ?</li>
+                    <li class="fragment fade-in">Qu'est-ce que c'est ?</li>
+                    <li class="fragment fade-in">Qu'est-ce que ça fait ?</li>
                 </ul>
+                <aside class="notes">
+                    Eviter manager, handler, Object, ...<br/>
+                </aside>
             </section>
             <section>
                 <h3>Duplication</h3>
                 <ul>
-                    <li class="fragment fade-in">Copy - paste</li>
-                    <li class="fragment fade-in">DRY</li>
+                    <li class="fragment fade-in">Copier - coller</li>
                 </ul>
+                <aside class="notes">
+                    Eviter les copier-coller<br/>
+                    Factoriser<br/>
+                    Nouvelle classe
+                </aside>
             </section>
         </section>
         <section>
             <section>
-                <h3>Make it SOLID</h3>
+                <h3>Rendez le SOLID</h3>
             </section>
             <section>
                 <h3>SOLID ?</h3>
@@ -195,71 +218,103 @@ public void update() {
                 <h3>Single Responsibility Principle</h3>
                 <ul>
                     <li class="fragment fade-in">God classes</li>
-                    <li class="fragment fade-in">On reason to change</li>
+                    <li class="fragment fade-in">Une seule raison de changer</li>
                 </ul>
+                <aside class="notes">
+                    Découper<br/>
+                    Qu'elle est la responssabilité de cette classe ?
+                </aside>
             </section>
             <section>
                 <h3>Open/Close Principle</h3>
                 <ul>
-                    <li class="fragment fade-in">Open for extension</li>
-                    <li class="fragment fade-in">Close for modification</li>
+                    <li class="fragment fade-in">Ouvert à l'extension</li>
+                    <li class="fragment fade-in">Fermé à la modification</li>
                 </ul>
+                <aside class="notes">
+                    Ajouter un élément sans modifier l'existant<br/>
+                </aside>
             </section>
             <section>
                 <h3>Liskov Substitution</h3>
                 <ul>
-                    <li class="fragment fade-in">A type should be replaceable by any subtype</li>
+                    <li class="fragment fade-in">Un type doit est remplaçable par ces sous-types</li>
                 </ul>
+                <aside class="notes">
+                    Un type = un contrat<br/>
+                    Que représente mon type ?<br/>
+                    Y-a-t il des sous-types ?<br/>
+                    Exemple : Map -> HashMap, TreeMap
+                </aside>
             </section>
             <section>
                 <h3>Interface Segregation Principle</h3>
                 <ul>
-                    <li class="fragment fade-in">Client specific</li>
-                    <li class="fragment fade-in">low coupling - high cohesion</li>
+                    <li class="fragment fade-in">Spécifique à un client</li>
+                    <li class="fragment fade-in">Couplage faible - forte cohésion</li>
                 </ul>
+                <aside class="notes">
+                    Découper les différents usages<br/>
+                    ex : User -> Acheteur, vendeur
+                </aside>
             </section>
             <section>
                 <h3>Dependency Inversion Principle</h3>
                 <ul>
-                    <li class="fragment fade-in">Abstractions should not depends upon details</li>
-                    <li class="fragment fade-in">Details should depend upon abstractions</li>
+                    <li class="fragment fade-in">Les abstractions ne doivent pas dépendre des implémentations</li>
+                    <li class="fragment fade-in">Les implémentations doivent dépendrent des abstraction</li>
                 </ul>
+                <aside class="notes">
+                    /!\ absctraction != abstract<br/>
+                    Un type = un contrat<br/>
+                    J'écris le contrat avant<br/>
+                    Ex : DAO database ou WS
+                </aside>
             </section>
         </section>
         <section>
             <h3>KISS</h3>
             <h4>Keep it simple stupid</h4>
             <ul>
-                <li class="fragment fade-in">Simpler code</li>
-                <li class="fragment fade-in">Easier reading</li>
-                <li class="fragment fade-in">Easier maintaining</li>
-                <li class="fragment fade-in">More reusable</li>
+                <li class="fragment fade-in">Code simple</li>
+                <li class="fragment fade-in">Lecture facile</li>
+                <li class="fragment fade-in">Maintenance facile</li>
+                <li class="fragment fade-in">Réutilisabilité</li>
             </ul>
+            <aside class="notes">
+                Simple<br/>
+                petit<br/>
+                court<br/>
+                Se faire relire
+            </aside>
         </section>
         <section>
-            <h3>In Real Life</h3>
+            <h3>Dans la vrai vie</h3>
             <blockquote class="fragment fade-in">We write code for human <br/>not for machine</blockquote>
         </section>
         <section>
-            <h3>In Real Life</h3>
+            <h3>Dans la vrai vie</h3>
             <ul>
-                <li class="fragment fade-in">Readable code</li>
-                <li class="fragment fade-in">Show the intend</li>
-                <li class="fragment fade-in">Improve the code</li>
-                <li class="fragment fade-in">Boy scout rule</li>
-                <li class="fragment fade-in">Improve yourself</li>
-                <li class="fragment fade-in">look for feedback</li>
+                <li class="fragment fade-in">Code lisible</li>
+                <li class="fragment fade-in">Montrer l'intention</li>
+                <li class="fragment fade-in">La rêgle du boy scout</li>
+                <li class="fragment fade-in">S'améliorer</li>
+                <li class="fragment fade-in">Chercher du feedback</li>
             </ul>
+            <aside class="notes">
+                Pas parfait, juste mieux
+            </aside>
         </section>
         <section>
             <section>
-                <h3>Examples</h3>
+                <h3>Exemples</h3>
                 <ul>
                     <li class="fragment fade-in">getInstance</li>
-                    <li class="fragment fade-in">heritage and reuse</li>
-                    <li class="fragment fade-in">Big methods / classes</li>
-                    <li class="fragment fade-in">Multiple responsibilities</li>
+                    <li class="fragment fade-in">Héritage et réutilisation</li>
+                    <li class="fragment fade-in">Méthodes ou classes énormes</li>
+                    <li class="fragment fade-in">Responsabilités multiples</li>
                 </ul>
+                <aside class="notes"></aside>
             </section>
             <section>
                 <h3>getInstance</h3>
@@ -271,95 +326,109 @@ if (mode == MONTHLY_MODE) {
 }
                 </code></pre>
                 <aside class="notes">
+                    Problèmes :
                     Tests compliqués<br/>
-                    Pas d'interface
+                    Pas d'interface<br/>
+                    Pas d'injection -> pas de remplacement possible<br/>
+                    Solution : Attribut setter dans constructeur
                 </aside>
             </section>
             <section>
-                <h3>Heritage and reuse</h3>
-                <ul>
-                    <li class="fragment fade-in">Favor composition over inheritance</li>
-                </ul>
-            </section>
-            <section>
-                <h3>Big methods / classes</h3>
-                <ul>
-                    <li class="fragment fade-in">A comment</li>
-                    <li class="fragment fade-in">New method or class</li>
-                </ul>
-            </section>
-            <section>
-                <h3>Multiple responsibilities</h3>
+                <h3>Héritage et réutilisation</h3>
                 <pre><code>
-con = Resources.DECLIC_DS.getConnection();
-ps = con.prepareStatement(SQL_INIT_BENCH);
-rs = ps.executeQuery();
-
-while (rs.next()) {
-    Set&lt;Portfolio&gt; ptfList = ptfMap.get(rs.getString("codeport"));
-    if (ptfList != null) {
-        for (Iterator&lt;Portfolio&gt; iterator = ptfList.iterator(); iterator.hasNext();) {
-            Portfolio portfolio = iterator.next();
-
-            BenchmarkShell benchmarkShell = getBenchmark(rs.getInt("idindice"));
-
-            if (benchmarkShell != null) {
-                if (benchmarkShell.getTypeIndice() != null) {
-                    benchmarkShell = new BenchmarkShell(benchmarkShell);
-                }
-            } else if (rs.getString("typeindice").contains(BenchmarkShell.BENCH_TYPE_SRRI) && -1 == rs.getInt("idindice")) {
-                // Si le bench SRRI est un portefeuille
-                benchmarkShell = new BenchmarkShell();
-                String codeIndiceSf = rs.getString("codeindicesf");
-                benchmarkShell.setCodeIndiceSf(codeIndiceSf);
-                benchmarkShell.setIdIndice(-1);
-
-                String[] codes = codeIndiceSf.split("#");
-                if (codes != null && codes.length == 2) {
-                    Portfolio benchPtf = null;
-                    Set&lt;Portfolio&gt; benchPtfList = ptfMap.get(codes[0]);
-                    if (benchPtfList != null) {
-                        for (Iterator&lt;Portfolio&gt; it = benchPtfList.iterator(); it.hasNext();) {
-                            Portfolio benchPortfolio = it.next();
-                            if (benchPortfolio.getCodetypepart().equalsIgnoreCase(codes[1]))
-                                benchPtf = benchPortfolio;
-                        }
-                    }
-
-                    if (benchPtf != null) {
-                        benchmarkShell.setDevise(benchPtf.getDevise());
-                        benchmarkShell.setNomIndice(benchPtf.getLibPortReporting());
-                    }
-                }
-            }
-
-            if (benchmarkShell != null) {
-                benchmarkShell.setTypeIndice(rs.getString("typeindice"));
-                benchmarkShell.setDateModif(rs.getTimestamp("datemodif"));
-                portfolio.addBenchmark(rs.getString("typeindice"), benchmarkShell);
-            }
-        }
+class UnmodifiableArrayList&lt;E&gt; extends ArrayList&lt;E&gt; {
+    public E set(int index, E element) {
+        throw new UnsupportedOperationException();
     }
-}
-} catch (SQLException e) {
-    throw new RamboSqlException("Cannot get Benchmark for all Portfolios ", e);
+    public void add(int index, E element) {
+        throw new UnsupportedOperationException();
+    }
+    public E remove(int index) {
+        throw new UnsupportedOperationException();
+    }
+    public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
+        throw new UnsupportedOperationException();
+    }
+...
 }
                 </code></pre>
+                <ul>
+                    <li class="fragment fade-in">Favoriser la composition plutôt que héritage</li>
+                </ul>
+                <aside class="notes">
+                    Problèmes : Type incohérent
+                    Solution :
+                    Encapsuler<br/>
+                    ArrayList en interne
+                </aside>
             </section>
-        </section>
-        <section>
             <section>
-                <h1>Tests</h1>
+                <h3>Méthodes ou classes énormes</h3>
+                <ul>
+                    <li class="fragment fade-in">Un commentaire / un bloc de code</li>
+                    <li class="fragment fade-in">Une nouvelle méthode / classe</li>
+                    <li class="fragment fade-in">Rechercher le couplage faible et une forte cohésion</li>
+                </ul>
+                <aside class="notes">
+                    Problème : lisibilité couplage
+                    Solution : découper avec l'IDE
+                </aside>
             </section>
             <section>
-                <h3>Tests, why ?</h3>
-            </section>
-            <section>
-                <h3>Tests, why not ?</h3>
+                <h3>Responsabilités multiples</h3>
+                <pre><code>
+public void sendGreetings(String fileName, XDate xDate, String smtpHost, int smtpPort)
+                    throws IOException, ParseException, AddressException, MessagingException {
+		BufferedReader in = new BufferedReader(new FileReader(fileName));
+		String str = "";
+		str = in.readLine(); // skip header
+		while ((str = in.readLine()) != null) {
+			String[] employeeData = str.split(", ");
+			Employee employee = new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3]);
+			if (employee.isBirthday(xDate)) {
+				String recipient = employee.getEmail();
+				String body = "Happy Birthday, dear %NAME%".replace("%NAME%", employee.getFirstName());
+				String subject = "Happy Birthday!";
+				sendMessage(smtpHost, smtpPort, "sender@here.com", subject, body, recipient);
+			}
+		}
+	}
+
+	private void sendMessage(String smtpHost, int smtpPort, String sender, String subject, String body, String recipient)
+                    throws AddressException, MessagingException {
+		// Create a mail session
+		java.util.Properties props = new java.util.Properties();
+		props.put("mail.smtp.host", smtpHost);
+		props.put("mail.smtp.port", "" + smtpPort);
+		Session session = Session.getInstance(props, null);
+
+		// Construct the message
+		Message msg = new MimeMessage(session);
+		msg.setFrom(new InternetAddress(sender));
+		msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+		msg.setSubject(subject);
+		msg.setText(body);
+
+		// Send the message
+		Transport.send(msg);
+	}
+                </code></pre>
+                <aside class="notes">
+                    Problème : Réutilisabilité, couplage
+                    Solution : Découper avec l'IDE
+                </aside>
             </section>
         </section>
         <section>
             <h2>Live coding</h2>
+        </section>
+        <section>
+            <h2>Birthday Greetings</h2>
+            <a href="https://github.com/xpmatteo/birthday-greetings-kata">https://github.com/xpmatteo/birthday-greetings-kata</a>
+        </section>
+        <section>
+            <h2>Gilded Roses</h2>
+            <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata" >https://github.com/emilybache/GildedRose-Refactoring-Kata</a>
         </section>
     </div>
 </div>
