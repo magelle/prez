@@ -1,0 +1,552 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Programmation reactive</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/novencia.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Programmation reactive</h1>
+				</section>
+				<section>
+					<h2>C'est quoi la programmation réactive ?</h2>
+					<ul>
+						<li class="fragment fadein">Des flux de données asynchrones</li>
+						<li class="fragment fadein">Observer / Observable (Design pattern)</li>
+						<li class="fragment fadein">Boites à outils </li>
+                        <li class="fragment fadein"><b>Tout est un flux</b></li>
+					</ul>
+				</section>
+				<section>
+					<h2>Qu'est-ce qu'un flux ?</h2>
+					<ul>
+						<li class="fragment fadein">Séquence d'évènements</li>
+						<li class="fragment fadein">Ordonnés</li>
+						<li class="fragment fadein">Evènements : <ul>
+							<li>Valeur</li>
+							<li>Erreur</li>
+							<li>Fin</li>
+						</ul></li>
+					</ul>
+				</section>
+				<section>
+					<h2>Qu'est-ce qu'on en fait ?</h2>
+					<ul>
+						<li class="fragment fadein">Ecouter ou Souscrire</li>
+						<li class="fragment fadein">Fusion de flux</li>
+						<li class="fragment fadein">Filtrage des évènements</li>
+						<li class="fragment fadein">Transformations des évènements</li>
+						<li class="fragment fadein">Traitement asynchrone</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Représenter un flux</h2>
+					<p>--a---b-c---d---X---|-></p>
+					<ul>
+						<li>a : Evènements</li>
+						<li>X : Erreur</li>
+						<li>| : signal de fin</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Compter les clics</h2>
+					<pre><code>
+  clickStream: ---c----c--c----c------c-->
+                    map(c devient 1)
+               ---1----1--1----1------1-->
+                        scan(+)
+counterStream: ---1----2--3----4------5-->
+                    </code></pre>
+                    <aside class="notes">
+                        map = e = fct(e)<br/>
+                        scan = reduce
+                    </aside>
+				</section>
+                <section>
+                    <h2>Compter les doubles clics</h2>
+                    <img src="img/reactive-2.png" height="600"/>
+                    <aside class="notes">
+                        throttle crée des groupes dévènements
+                    </aside>
+                </section>
+                <section>
+                    <h2>C'est parti !</h2>
+                </section>
+                <section>
+                    <h2>Les outils</h2>
+                    <ul>
+                        <li>Html</li>
+                        <li>Javascript</li>
+                        <li>JQuery</li>
+                        <li>RxJS</li>
+                        <li>Votre éditeur favori</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Le sujet</h2>
+                    <p>Un moteur de suggestions</p>
+                    <img src="img/reactive-3.png" />
+                </section>
+                <section>
+                    <h2>Les actions</h2>
+                    <ul>
+                        <li>Refresh All</li>
+                        <li>Le bouton X (Supprimer)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Récupérer le projet</h2>
+                    <a href="https://github.com/magelle/reactive-initiation">https://github.com/magelle/reactive-initiation</a>
+                    <pre><code>git clone https://github.com/magelle/reactive-initiation</code></pre>
+                </section>
+                <section>
+                    <h2>Etape 1 : Appeler l'URL</h2>
+                    <section><h3>Comment ??</h3></section>
+                    <section>
+                        <h3>Créer un flux de l'url</h3>
+                        <pre><code>var requestStream = Rx.Observable.of('https://api.github.com/users');</code></pre>
+                    </section>
+                    <section>
+                        <h3>Appeler l'url</h3>
+                        <pre><code>
+requestStream.subscribe(function(requestUrl) {
+    // execute the request
+    jQuery.getJSON(requestUrl, function(responseData) {
+        // ...
+    });
+});
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Créer un flux de réponse</h3>
+                        <pre><code>
+requestStream.subscribe(function(requestUrl) {
+  // execute the request
+  var responseStream = Rx.Observable.create(function (observer) {
+    jQuery.getJSON(requestUrl)
+    .then(function(response) { observer.next(response); })
+    .fail(function(jqXHR, status, error) { observer.error(error); })
+    .done(function() { observer.complete(); });
+  });
+
+  responseStream.subscribe(function(response) {
+    // do something with the response
+  });
+});
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Créer directement à partir d'une promise</h3>
+                        <pre><code>
+var responseMetastream = requestStream
+  .map(function(requestUrl) {
+    return Rx.Observable.fromPromise(jQuery.getJSON(requestUrl));
+  });
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Un meta flux !!!</h3>
+                        <img src="img/reactive-4.png" />
+                    </section>
+                    <section>
+                        <h3>Applatissons tout ça</h3>
+                        <pre><code>
+var responseStream = requestStream
+  .flatMap(function(requestUrl) {
+    return Rx.Observable.fromPromise(jQuery.getJSON(requestUrl));
+  });
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Un meta flux applati</h3>
+                        <img src="img/reactive-5.png" />
+                    </section>
+                    <section>
+                        <h3>Affichons ça</h3>
+                        <pre><code>
+responseStream.subscribe(function(response) {
+  // render response to the DOM however you wish
+});
+                        </code></pre>
+                        <aside class="notes">
+                            <pre><code>
+renderSuggestion(response[0], '.suggestion1');
+renderSuggestion(response[1], '.suggestion2');
+renderSuggestion(response[2], '.suggestion3');
+                            </code></pre>
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Au final</h3>
+                        <pre><code>
+var requestStream = Rx.Observable.returnValue('https://api.github.com/users');
+
+var responseStream = requestStream
+  .flatMap(function(requestUrl) {
+    return Rx.Observable.fromPromise(jQuery.getJSON(requestUrl));
+  });
+
+responseStream.subscribe(function(response) {
+  // render response to the DOM however you wish
+  renderSuggestion(response[0], '.suggestion1');
+  renderSuggestion(response[1], '.suggestion2');
+  renderSuggestion(response[2], '.suggestion3');
+});
+                        </code></pre>
+                    </section>
+                </section>
+                <section>
+                    <h2>Etape 2 : Rafraichir</h2>
+                    <section>
+                        <h3>Précisions</h3>
+                        <ul>
+                            <li>Un appel : 100 suggestions</li>
+                            <li>On peut utiliser since</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Todo</h3>
+                        <ul>
+                            <li>Un flux de clic</li>
+                            <li>Mettre à jour l'URL</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Un flux de clic</h3>
+                        <pre><code>
+var refreshButton = document.querySelector('.refresh');
+var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>clic -> URL</h3>
+                        <pre><code>
+var requestStream = refreshClickStream
+  .map(function() {
+    var randomOffset = Math.floor(Math.random()*500);
+    return 'https://api.github.com/users?since=' + randomOffset;
+  });
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>On a tout cassé !!</h3>
+                        <p>Plus d'évènement à l'ouverture de la page</p>
+                    </section>
+                    <section>
+                        <h3>Réparons</h3>
+                        <pre><code>
+var requestOnRefreshStream = refreshClickStream
+  .map(function() {
+    var randomOffset = Math.floor(Math.random()*500);
+    return 'https://api.github.com/users?since=' + randomOffset;
+  });
+var startupRequestStream = Rx.Observable.of('https://api.github.com/users');
+                        </code></pre>
+                        <aside class="notes">
+                            On crée 2 streams<br/>
+                            Il faut les utiliser
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Réparons</h3>
+                        <pre><code>
+stream A: ---a--------e-----o----->
+stream B: -----B---C-----D-------->
+                    merge
+          ---a-B---C--e--D--o----->
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Voilà</h3>
+                        <pre><code>
+var requestOnRefreshStream = refreshClickStream
+  .map(function() {
+    var randomOffset = Math.floor(Math.random()*500);
+    return 'https://api.github.com/users?since=' + randomOffset;
+  });
+
+var startupRequestStream = Rx.Observable.of('https://api.github.com/users');
+
+var requestStream = Rx.Observable.merge(
+  requestOnRefreshStream, startupRequestStream
+);
+                        </code></pre>
+                        <aside class="notes">
+                            On merge requestOnRefreshStream et startupRequestStream
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>En plus cours</h3>
+                        <pre><code>
+var requestStream = refreshClickStream
+  .map(function() {
+    var randomOffset = Math.floor(Math.random()*500);
+    return 'https://api.github.com/users?since=' + randomOffset;
+  })
+  .merge(Rx.Observable.returnValue('https://api.github.com/users'));
+                        </code></pre>
+                        <aside class="notes">
+                            On enlève les variables intermédiaires
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Encode plus concis !!</h3>
+                        <pre><code>
+var requestStream = refreshClickStream
+  .map(function() {
+    var randomOffset = Math.floor(Math.random()*500);
+    return 'https://api.github.com/users?since=' + randomOffset;
+  })
+  .startWith('https://api.github.com/users');
+                        </code></pre>
+                        <aside class="notes">
+                            startWith remplace merge<br/>
+                            Seul ajout
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Clear before refresh</h3>
+                        <p>Rendre l'interface plus réactive</p>
+                        <aside class="notes">
+                            suggestions remplacées à la reception e la requête<br/>
+                            pas au clic
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Suppression des suggestions au clic</h3>
+                        <pre><code>
+refreshClickStream.subscribe(function() {
+  hide('.suggestion1');
+  hide('.suggestion2');
+  hide('.suggestion3');
+});
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Stop, encore un bug !</h3>
+                        <aside class="notes">Ordres des flux</aside>
+                    </section>
+                    <section>
+                        <h3>Un flux par suggestion</h3>
+                        <pre><code>
+var suggestion1Stream = responseStream
+  .map(function(listUsers) {
+    // get one random user from the list
+    return listUsers[Math.floor(Math.random()*listUsers.length)];
+  });
+                        </code></pre>
+                        <aside class="notes">
+                            Une suggestion un flux
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>On affiche les souscriptions</h3>
+                        <pre><code>
+suggestion1Stream.subscribe(function(suggestion) {
+  // render the 1st suggestion to the DOM
+});
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>On peut corriger</h3>
+                        <pre><code>
+var suggestion1Stream = responseStream
+  .map(function(listUsers) {
+    // get one random user from the list
+    return listUsers[Math.floor(Math.random()*listUsers.length)];
+  })
+  .merge(
+    refreshClickStream.map(function(){ return null; })
+  );
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Et l'affichage</h3>
+                        <pre><code>
+suggestion1Stream.subscribe(function(suggestion) {
+  if (suggestion === null) {
+    // hide the first suggestion DOM element
+  }
+  else {
+    // show the first suggestion DOM element
+    // and render the data
+  }
+});
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>En résummé</h3>
+                        <pre><code>
+refreshClickStream: ----------o--------o---->
+     requestStream: -r--------r--------r---->
+    responseStream: ----R---------R------R-->
+ suggestion1Stream: ----s-----N---s----N-s-->
+ suggestion2Stream: ----q-----N---q----N-q-->
+ suggestion3Stream: ----t-----N---t----N-t-->
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Suggestion au démarrage</h3>
+                        <pre><code>
+var suggestion1Stream = responseStream
+  .map(function(listUsers) {
+    // get one random user from the list
+    return listUsers[Math.floor(Math.random()*listUsers.length)];
+  })
+  .merge(
+    refreshClickStream.map(function(){ return null; })
+  )
+  .startWith(null);
+                        </code></pre>
+                        <aside class="notes">
+                            Tout cacher au démarrage
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Du coup</h3>
+                        <pre><code>
+refreshClickStream: ----------o---------o---->
+     requestStream: -r--------r---------r---->
+    responseStream: ----R----------R------R-->
+ suggestion1Stream: -N--s-----N----s----N-s-->
+ suggestion2Stream: -N--q-----N----q----N-q-->
+ suggestion3Stream: -N--t-----N----t----N-t-->
+                        </code></pre>
+                    </section>
+                </section>
+            </section>
+            <section>
+                <h2>Etape 3 : Supprimer une suggestion</h2>
+                    <section>
+                        <h3>Simple ! </h3>
+                        <pre><code>
+var close1Button = document.querySelector('.close1');
+var close1ClickStream = Rx.Observable.fromEvent(close1Button, 'click');
+// and the same for close2Button and close3Button
+
+var requestStream = refreshClickStream.startWith('startup click')
+  .merge(close1ClickStream) // we added this
+  .map(function() {
+    var randomOffset = Math.floor(Math.random()*500);
+    return 'https://api.github.com/users?since=' + randomOffset;
+  });
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Oh, non !</h3>
+                        <p>Toutes les suggestions sont rechargées</p>
+                    </section>
+                    <section>
+                        <h3>De quoi a-t-on besoins ?</h3>
+                        <pre><code>
+    requestStream: --r--------------->
+   responseStream: ------R----------->
+close1ClickStream: ------------c----->
+suggestion1Stream: ------s-----s----->
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>La solution : combineLatest</h3>
+                        <pre><code>
+stream A: --a-----------e--------i-------->
+stream B: -----b----c--------d-------q---->
+                   combineLatest(f)
+          -----AB---AC--EC---ED--ID--IQ--->
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Chez nous : </h3>
+                        <pre><code>
+var suggestion1Stream = close1ClickStream
+  .combineLatest(responseStream,
+    function(click, listUsers) {
+      return listUsers[Math.floor(Math.random()*listUsers.length)];
+    }
+  )
+  .merge(
+    refreshClickStream.map(function(){ return null; })
+  )
+  .startWith(null);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Mais ça fonctionne pas !</h3>
+                        <pre><code>
+var suggestion1Stream = close1ClickStream.startWith('this is a virtual click')
+  .combineLatest(responseStream,
+    function(click, listUsers) {
+      return listUsers[Math.floor(Math.random()*listUsers.length)];
+    }
+  )
+  .merge(
+    refreshClickStream.map(function(){ return null; })
+  )
+  .startWith(null);
+                        </code></pre>
+                        <aside class="notes">
+                            On a ajouté .startWith('this is a virtual click')
+                        </aside>
+                    </section>
+                    <section>
+                        <h1>Fini !</h1>
+                    </section>
+                </section>
+                <section>
+                    <h3>Conclusion</h3>
+                    <section>
+                        <h2>Avantages</h2>
+                        <ul>
+                            <li>Application fortement interactive</li>
+                            <li>Découpage</li>
+                            <li>On décrit les interactions</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Inconvénients</h2>
+                        <ul>
+                            <li>Debug compliqué</li>
+                            <li>Nouveau paradigme</li>
+                        </ul>
+                    </section>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
