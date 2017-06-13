@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 		},
 
 		zip: {
-			'reveal-js-presentation.zip': [
+			'prog-reactive.zip': [
 				'index.html',
 				'css/**',
 				'js/**',
