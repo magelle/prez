@@ -33,6 +33,19 @@ module.exports = function(grunt) {
 			}
 		},
 
+		includes: {
+			build: {
+				cwd: 'src',
+				src: [ 'index.html' ],
+				dest: '.',
+				options: {
+					flatten: true,
+					includePath: 'src/pages',
+					banner: '<!-- Site built using grunt includes! -->\n'
+				}
+			}
+		},
+
 		sass: {
 			core: {
 				files: {
@@ -130,7 +143,8 @@ module.exports = function(grunt) {
 				tasks: 'css-core'
 			},
 			html: {
-				files: root.map(path => path + '/*.html')
+				files: ['src/index.html', 'src/pages/*.html'],
+				tasks: 'includes'
 			},
 			markdown: {
 				files: root.map(path => path + '/*.md')
@@ -149,6 +163,7 @@ module.exports = function(grunt) {
 	});
 
 	// Dependencies
+	grunt.loadNpmTasks( 'grunt-includes' );
 	grunt.loadNpmTasks( 'grunt-contrib-qunit' );
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
@@ -161,7 +176,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-retire' );
 
 	// Default task
-	grunt.registerTask( 'default', [ 'css', 'js' ] );
+	grunt.registerTask( 'default', [ 'includes', 'css', 'js' ] );
 
 	// JS task
 	grunt.registerTask( 'js', [ 'jshint', 'uglify', 'qunit' ] );
@@ -179,7 +194,7 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'package', [ 'default', 'zip' ] );
 
 	// Serve presentation locally
-	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+	grunt.registerTask( 'serve', [ 'includes', 'connect', 'watch' ] );
 
 	// Run tests
 	grunt.registerTask( 'test', [ 'jshint', 'qunit' ] );
