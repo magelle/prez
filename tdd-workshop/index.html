@@ -90,14 +90,14 @@
             <h2>Structure d'un test</h2>
             <pre><code class="java">
 public void add_should_sum_several_numbers() {
-    // Given
+    // Given / Arrange
     Calculator calculator = new Calculator();
 
-    // When
+    // When / Act
     calculator.add(2);
     calculator.add(4);
 
-    // Then
+    // Then / Assert
     assertThat(calculator.result()).isEqualTo(6);
 }
             </code></pre>
@@ -148,8 +148,14 @@ public void add_should_sum_several_numbers() {
         </section>
         <section>
             <h2>Outils de tests</h2>
-            <p>Mock, Spy, Stubs, Fake</p>
-            <p class="fragment fade-in">Librairies : Mockito, NSubstitute</p>
+            <ul>
+                <li>Dummy</li>
+                <li>Fake</li>
+                <li>Stubs</li>
+                <li>Spy</li>
+                <li>Mock</li>
+            </ul>
+            <p class="fragment fade-in">Librairies : Mockito, NSubstitute, HSQLDB, Wiremock</p>
             <aside class="notes">
                 <ul>
                     <li>Mock : Je définie le comportement
@@ -164,15 +170,27 @@ public void add_should_sum_several_numbers() {
                         </ul>
                     </li>
                 </ul>
+                <ul>
+                    <li><b>Dummy</b> objects are passed around but never actually used. Usually they are just used to fill parameter lists.</li>
+                    <li><b>Fake</b> objects actually have working implementations, but usually take some shortcut which makes them not suitable for production (an in memory database is a good example).</li>
+                    <li><b>Stubs</b> provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test.</li>
+                    <li><b>Spies</b> are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent.</li>
+                    <li><b>Mocks</b> are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.</li>
+                </ul>
             </aside>
         </section>
         <section>
             <h2>Code legacy</h2>
             <ul>
-                <li>Créer une couverture de tests</li>
-                <li>Utiliser les outils de l'IDE</li>
+                <li>Viser le code important</li>
+                <li>Isoler le code à tester</li>
                 <li>Micro steps</li>
+                <li>Utiliser les outils de l'IDE</li>
             </ul>
+        </section>
+        <section>
+            <h2>Pyramide des tests</h2>
+            <img src="images/test-pyramid.png" />
         </section>
         <section>
             <h2>Resources</h2>
@@ -201,7 +219,6 @@ public void add_should_sum_several_numbers() {
                 <li>Mutation testing</li>
                 <li>ATTD : Acceptance Test Driven Development</li>
                 <li>BDD : Behavior Driven Development</li>
-                <li>Pyramide des Test</li>
             </ul>
         </section>
         <section>
@@ -231,6 +248,41 @@ public void add_should_sum_several_numbers() {
         </section>
         <section>
             <h1>Let's go</h1>
+        </section>
+        <section>
+            <h3>Kata</h3>
+            <section>
+                <h2>Leap year</h2>
+                <p>
+                    Write a function that returns true or false depending on whether its input integer is a leap year or not.
+                </p>
+                <p>
+                    A leap year is divisible by 4, but is not otherwise divisible by 100 unless it is also divisible by 400.
+                </p>
+                <ul>
+                    <li>2001 is a typical common year</li>
+                    <li>1996 is a typical leap year</li>
+                    <li>1900 is an atypical common year</li>
+                    <li>2000 is an atypical leap year</li>
+                </ul>
+            </section>
+            <section>
+                <h2>RPN</h2>
+                <h3>reverse polonish notation</h3>
+                <ul>
+                    <li class="numbers">3 4 + = 7</li>
+                    <li class="numbers">5 1 2 + 4 x + 3 - = 14</li>
+                    <li class="numbers">1 16 14 - 3 = 1 2 3</li>
+                </ul>
+            </section>
+            <section>
+                <h2>MiniPricer</h2>
+                <a href="https://ingdevfi.wordpress.com/2015/02/27/kata-finance-le-minipricer/">https://ingdevfi.wordpress.com/2015/02/27/kata-finance-le-minipricer/</a>
+            </section>
+            <section>
+                <h2>Birthday greetings</h2>
+                <a href="https://github.com/xpmatteo/birthday-greetings-kata">https://github.com/xpmatteo/birthday-greetings-kata</a>
+            </section>
         </section>
     </div>
 </div>

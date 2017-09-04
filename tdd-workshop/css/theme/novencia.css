@@ -18,7 +18,7 @@ body {
 }
 
 .reveal {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Georgia', sans-serif;
     font-size: 38px;
     font-weight: normal;
     color: #fff;
@@ -402,4 +402,8 @@ b.green {
 
 b.blue {
     color: blue;
+}
+
+.numbers {
+    word-spacing: 20px;
 }
