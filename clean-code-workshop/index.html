@@ -62,41 +62,89 @@
                 <h3>Novencia</h3>
             </section>
             <section>
-                <h2>Clean code, c'est quoi ?</h2>
-                <h3 class="fragment fade-in">Et l'inverse ?</h3>
-                <aside class="notes">
-                    C'est quoi le clean code pour vous ?
-                </aside>
+                <h2>Clean code, Bad code</h2>
+                <h3 class="fragment fade-in">C'est quoi le mauvais code ?</h3>
             </section>
             <section>
-                <h2>Pourquoi faire du clean code ?</h2>
-                <ul class="fragment fade-in">
-                    <li>Avoir moins mal</li>
-                    <li>Allez plus vite</li>
-                    <li>Augmenter la productivité</li>
-                    <li>Avoir une application plus fiable</li>
-                    <li>Mieux faire, en être fier</li>
+                    <blockquote>No matter how slow you are writing clean code, you will always be slower if you make a mess.</blockquote>
+                    Uncle Bob Martin
+                    <aside class="notes">
+                            <ul>
+                                <li>Auteur de nombreux livres : clean code, clean coder, clean architecture, ...</li>
+                                <li>Signataire manifest Agile</li>
+                            </ul>
+                    </aside>
+            </section>
+            <section>
+                <h3>Déroulé</h3>
+                <ul>
+                    <li>Coder proprement</li>
+                    <li>Les acronymes (SOLID, DRY, ...)</li>
+                    <li>Devenir un clean codeur</li>
+                    <li>Les outils</li>
+                    <li>Kata</li>
                 </ul>
-                <aside class="notes">
-                    Pourquoi faire du clean code ?
-                </aside>
             </section>
             <section>
-                <h2>Comment faire du clean code ?</h2>
-                <ul class="fragment fade-in">
-                    <li>Des principes</li>
-                    <li>Des pratiques</li>
-                </ul>
-                <aside class="notes">
-                    <ul>
-                        <li>Des principes à "essayer" d'appliquer, parfois pas très parlant</li>
-                        <li>Des pratiques à adopter</li>
-                    </ul>
-                </aside>
-            </section>
-            <section>
+                <h2>Clean code</h2>
+                <section></section>
                 <section>
-                    <h2>Des principes</h2>
+                    <h3>Des noms</h3>
+                    <ul class="fragment fade-in">
+                        <li>Significatif - révélateur</li>
+                        <li>Eviter les codes, acronymes</li>
+                        <li>Distinctions</li>
+                        <li>Un mot par concept</li>
+                        <li>Choisir des noms du métier</li>
+                        <li>Ajouter du context</li>
+                    </ul>
+                    <aside class="notes">
+                        <ul>
+                            <li>toto interdit - que contient - que fait</li>
+                            <li></li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h3>Fonctions et méthodes</h3>
+                    <ul class="fragment fade-in">
+                        <li>Courtes</li>
+                        <li>Font une seule chose</li>
+                        <li>Un seul niveau d'abstraction</li>
+                        <li>éviter les side effects</li>
+                    </ul>
+                    <aside class="notes"></aside>
+                </section>
+                <section>
+                    <h3>Commentaires</h3>
+                    <ul class="fragment fade-in">
+                        <li>Ne doit pas compenser le mauvais code</li>
+                        <li>Explique, clarifie</li>
+                        <li>TODO: </li>
+                    </ul>
+                    <aside class="notes"></aside>
+                </section>
+                <section>
+                    <h3>Programmation Objet (et classes)</h3>
+                    <ul class="fragment fade-in">
+                        <li>Cacher la structure</li>
+                        <li>Une seule responsabilité</li>
+                        <li>Eviter l'héritage</li>
+                        <li>Favoriser la composition</li>
+                    </ul>
+                    <aside class="notes"></aside>
+                </section>
+                <section>
+                    <h3>Amélioration</h3>
+                    <ul class="fragment fade-in">
+                        <li></li>
+                    </ul>
+                    <aside class="notes"></aside>
+                </section>
+            </section>
+            <section>
+                <h2>Des principes</h2>
+                <section>
                     <ul>
                         <li>KISS</li>
                         <li>DRY</li>
@@ -160,6 +208,8 @@
                         </ul>
                     </aside>
                 </section>
+            </section>
+            <section>
                 <section>
                     <h2>SOLID</h2>
                     <ul>
@@ -219,9 +269,9 @@
                         Rectangle rectangle = (Rectangle) shape;
                         area += rectangle.getWidth() * rectangle.getHeight();
                     }
-                    else {
+                    else if (shape instanceof Circle) {
                         Circle circle = (Circle) shape;
-                        area += circle.getRadius() * circle.getRadius() * Math.PI;
+                        area += circle.getRadius() * circle.getRadius() * PI;
                     }
                 }
                 return area;
@@ -309,148 +359,32 @@
                 </section>
             </section>
             <section>
-                <h2>Mais dans la vrai vie ?</h2>
-            </section>
-            <section>
-                <h2>Boy Scout Rule</h2>
-                <p>Always leave the campground cleaner than you found it</p>
-                <p>Toujours quitter le campement plus propre que vous l'avez trouvé</p>
-            </section>
-            <section>
-                <h2>Composition plutôt qu'héritage</h2>
-                <p></p>
-            </section>
-            <section>
-                <h2>Des noms éloquents</h2>
-                <div class="left-part">
-                    <pre class="fragment fade-in"><code>
-public MessageManager  {
-    ...
-}
-</code></pre>
-                </div>
-                <div class="right-part">
-                    <pre class="fragment fade-in"><code>
-public MailSender {
-    ...
-}
-</code></pre>
-                </div>
-            </section>
-            <section>
-                <h2>Des petites méthodes</h2>
-                <div class="left-part">
-                    <pre class="fragment fade-in"><code>
-public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
-
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
-                }
-            }
-        }
-}
-</code></pre>
-                </div>
-                <div class="right-part">
-                    <pre class="fragment fade-in"><code>
-public void updateQuality() {
-    for (Item item : items) {
-        UpdatableItem updatableItem
-            = UpdatableItem.fromItem(item);
-        updatableItem.updateQuality();
-    }
-}
-</code></pre>
-                </div>
-            </section>
-            <section>
-                <h2>Des classes cohérentes</h2>
-                <div class="left-part">
-                    <pre class="fragment fade-in"><code>
-public class  {
-
-}
-</code></pre>
-                </div>
-                <div class="right-part">
-                    <pre class="fragment fade-in"><code>
-public class  {
-
-}
-</code></pre>
-                </div>
-            </section>
-            <section>
-                <h2>Des pratiques</h2>
+                <h2>Devenir un clean codeur</h2>
+                <section></section>
                 <section>
-                    <h1>Pair programming</h1>
-                </section>
-                <section>
-                    <h1>Code review</h1>
+                    <h1>Essayer</h1>
                 </section>
                 <section>
                     <h1>Tests unitaires</h1>
                 </section>
                 <section>
-                    <h1>Extreme programming</h1>
+                    <h1>Code review</h1>
+                </section>
+                <section>
+                    <h1>Pair programming</h1>
                 </section>
             </section>
             <section>
-                <h2>Aux niveaux supperieurs</h2>
-                <ul>
-                    <li>Architecture hexagonale</li>
-                    <li>DDD</li>
-                    <li>...</li>
-                </ul>
+                <h2>Outils</h2>
+                <section>
+                    <h3>Sonarqube</h3>
+                </section>
+                <section>
+                    <h3>tslint, jslint, eslint, ...</h3>
+                </section>
             </section>
             <section>
-                <h2>Un Mindset</h2>
-                <blockquote>Comment puis-je rendre ce code meilleur ?</blockquote>
-                <p>Vous, demain</p>
+                <h2>Kata</h2>
             </section>
         </div>
     </div>

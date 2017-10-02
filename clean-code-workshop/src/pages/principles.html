@@ -1,6 +1,6 @@
 <section>
+    <h2>Des principes</h2>
     <section>
-        <h2>Des principes</h2>
         <ul>
             <li>KISS</li>
             <li>DRY</li>
@@ -64,6 +64,8 @@
             </ul>
         </aside>
     </section>
+</section>
+<section>
     <section>
         <h2>SOLID</h2>
         <ul>
@@ -123,9 +125,9 @@ public double Area(Object[] shapes) {
             Rectangle rectangle = (Rectangle) shape;
             area += rectangle.getWidth() * rectangle.getHeight();
         }
-        else {
+        else if (shape instanceof Circle) {
             Circle circle = (Circle) shape;
-            area += circle.getRadius() * circle.getRadius() * Math.PI;
+            area += circle.getRadius() * circle.getRadius() * PI;
         }
     }
     return area;
