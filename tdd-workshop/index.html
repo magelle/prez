@@ -52,27 +52,27 @@
           <h2>TDD, Pourquoi ?</h2>
           <ul>
               <li class="fragment fade-in">Tests first</li>
-              <li class="fragment fade-in">Confiance</li>
-              <li class="fragment fade-in">Documentation</li>
-              <li class="fragment fade-in">Design</li>
+              <li class="fragment fade-in">Guide</li>
+              <li class="fragment fade-in">Design "émergent"</li>
               <li class="fragment fade-in">Expérimentation</li>
               <li class="fragment fade-in">Harnais de sécurité</li>
-              <li class="fragment fade-in">Guide</li>
+              <li class="fragment fade-in">Confiance</li>
+              <li class="fragment fade-in">Documentation</li>
           </ul>
           <aside class="notes">
               <ul>
                   <li>Test firsts : Reflection autour du test -> autour de la fonctionnalité</li>
-                  <li>Confiance : dans le code écrit</li>
-                  <li>Documentation : comment ça fonctionne</li>
+                  <li>Guide : laissez-vous guider</li>
                   <li>Design : Test compliqué -> design adapté ?</li>
                   <li>Expérimentation : comment ça réagi si -> nouveau test</li>
                   <li>Harnais : exécuté à la compilation -> je sais si ça explose</li>
-                  <li>Guide : laissez-vous guider</li>
+                  <li>Confiance : dans le code écrit</li>
+                  <li>Documentation : comment ça fonctionne</li>
               </ul>
           </aside>
         </section>
         <section>
-            <h2>Test cycle</h2>
+            <h2>TDD : une méthode</h2>
             <img src="images/red-green-refactor.png" alt="red green refactor schemas" />
             <aside class="notes">
                 <ul>
@@ -83,7 +83,7 @@
             </aside>
         </section>
         <section>
-            <h2>Test cycle</h2>
+            <h2>TDD : une méthode</h2>
             <img src="images/precise-red-green-refactor.png" alt="red green refactor - a more precise schemas" />
         </section>
         <section>
@@ -184,8 +184,6 @@ public void add_should_sum_several_numbers() {
             <ul>
                 <li>Viser le code important</li>
                 <li>Isoler le code à tester</li>
-                <li>Micro steps</li>
-                <li>Utiliser les outils de l'IDE</li>
             </ul>
         </section>
         <section>
@@ -194,14 +192,16 @@ public void add_should_sum_several_numbers() {
         </section>
         <section>
             <h2>Resources</h2>
-            <ul>
-                <li>Growing OO software guided by tests</li>
-                <li>Test Driven Development: By Example</li>
-                <li>The art of Unit Testing, second edition</li>
-                <li><a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks aren't Stubs</a></li>
-                <li><a href="https://www.youtube.com/watch?v=XHnuMjah6ps">Outside in TDD : live coding</a></li>
-                <li><a href="https://www.youtube.com/watch?v=_NnElPO5BU0">Testing and Refactoring Legacy Code</a></li>
-            </ul>
+            <small>
+                <ul>
+                    <li><b>Growing OO software guided by tests</b>, Steve Freeman</li>
+                    <li><b>Test Driven Development: By Example</b>, Kent Beck</li>
+                    <li><b>The art of Unit Testing, second edition</b>, Roy Osherove</li>
+                    <li><a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks aren't Stubs</a> Marting Fowler</li>
+                    <li><a href="https://www.youtube.com/watch?v=XHnuMjah6ps">Outside in TDD : live coding</a> Sandro Mancuso</li>
+                    <li><a href="https://www.youtube.com/watch?v=_NnElPO5BU0">Testing and Refactoring Legacy Code</a> Sandro Mancuso</li>
+                </ul>
+            </small>
             <aside class="notes">
                 <ul>
                     <li>Growing object-oriented software guided by tests -> Steve Freeman</li>
@@ -216,38 +216,17 @@ public void add_should_sum_several_numbers() {
         <section>
             <h2>Aller plus loin</h2>
             <ul>
-                <li>Mutation testing</li>
+                <li>TDD Double boucle</li>
                 <li>ATTD : Acceptance Test Driven Development</li>
                 <li>BDD : Behavior Driven Development</li>
+                <li>Mockist vs Classic TDD</li>
+                <li>Mutation testing</li>
             </ul>
         </section>
-        <section>
-            <h2>Différentes écoles</h2>
-            <ul>
-                <li>Classic
-                    <ul>
-                        <li>Inside out</li>
-                        <li>Bottom up</li>
-                    </ul>
-                </li>
-                <br/>
-                <li>Mockist
-                    <ul>
-                        <li>Outside in</li>
-                        <li>Top down</li>
-                    </ul>
-                </li>
-            </ul>
-            <aside class="notes">
-                Deux écoles
-                <ul>
-                    <li>Classic : design first, commence par petites briques puis agrégation</li>
-                    <li>Mockist : on mock tout, on commence par la big picture</li>
-                </ul>
-            </aside>
         </section>
         <section>
             <h1>Let's go</h1>
+            <h2>Ping Pong</h2>
         </section>
         <section>
             <h3>Kata</h3>
