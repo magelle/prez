@@ -10,7 +10,7 @@ Clean code : à quoi faire attention
  - les commentaires (good vs bad, )
  - Objects et classes (encapsulation, héritage vs composition, ...)
  - Amélioration (Boy scout rule)
- - ... 
+ - ...
 
 Les acronymes (Qui ne seront pas ) :
  - STUPID
