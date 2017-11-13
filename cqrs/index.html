@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>CQRS</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/novencia.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section>
+					<h1>CQRS</h1>
+					<h2>Command Query Responsability Segregation</h2>
+				</section>
+				<section>
+					<img src="images/CQRS.png" alt="a cqrs schemas" />
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Pourquoi ?</h1>
+				</section>
+				<section>
+					<h2>Volume lecture / écriture</h2>
+					<img src="images/call-rate.png" alt="sometimes a lot more read than write access" />
+				</section>
+				<section>
+					<h2>Forme des données</h2>
+					<img src="images/different-data-shapes.png" alt="Read an write has different data shapes" />
+				</section>
+				<section>
+					<h2>Traitement des données</h2>
+					<img src="images/different-treatment.png" alt="Read and write has differents treatment" />
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Comment ?</h1>
+				</section>
+				<section>
+					<h2>Lecture / écriture séparés</h2>
+					<img src="images/CQRS.png" alt="a cqrs schemas" />
+				</section>
+				<section>
+					<h2>Ecriture</h2>
+					<img src="images/write-process.png" alt="on write no read call" />
+				</section>
+				<section>
+					<h2>Lecture</h2>
+					<img src="images/read-process.png" alt="on read no write call" />
+				</section>
+				<section>
+					<h2>Synchronisation : Comment ?</h2>
+					<img src="images/how-to-update-read.png" alt="How to update read" />
+				</section>
+				<section>
+					<h2>Synchronisation : Pull</h2>
+					<img src="images/pull-data-from-write.png" alt="Data could be pull from write to read" />
+				</section>
+				<section>
+					<h2>Synchronisation : Push</h2>
+					<img src="images/push-to-read.png" alt="Data could be push from write to read" />
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Avantages</h1>
+				</section>
+				<section>
+					<h2>Lecture / écriture séparées</h2>
+					<img src="images/separate-read-write.png" alt="read and write are separate" />
+				</section>
+				<section>
+					<h2>Stockage sous la forme d'affichage</h2>
+					<img src="images/read-format.png" alt="store as you read" />
+				</section>
+				<section>
+					<h2>Data store adaptés</h2>
+					<img src="images/different-storing.png" alt="store in the right system" />
+				</section>
+				<section>
+					<h2>Plusieurs systèmes de vue</h2>
+					<img src="images/different-read.png" alt="store in the right system" />
+				</section>
+				<section>
+					<h2>Scaling</h2>
+					<img src="images/different-scaling.png" alt="read and write can scale différently" />
+				</section>
+				<section>
+					<h2>Recronstruire les vues</h2>
+					<img src="images/recreate-read.png" alt="Read can be recreate from write" />
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Désavantages</h1>
+				</section>
+				<section>
+					<h2>Un système complexe</h2>
+					<img src="images/drawback.png" alt="A complexe system" />
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			history: true,
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
+</html>
