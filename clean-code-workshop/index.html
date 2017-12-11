@@ -253,6 +253,23 @@
                     </aside>
                 </section>
                 <section>
+                        <h2>Single Responsability Principle</h2>
+                        <pre class="fragment fade-in"><code>
+            public void sendGreetings(Date date) {
+                for(Employee employee : employees) {
+                    if (employee.isBirthday(date)) {
+                        messageService.sendBirthdayGreetingsMessage(employee);
+                    }
+                }
+            }
+                    </code></pre>
+                    <ul class="fragment fade-in">
+                        <li>Meilleur lisibilité</li>
+                        <li>Plus maintenable</li>
+                        <li>Réutilisable</li>
+                    </ul>
+                </section>
+                <section>
                     <h2>Open / close principle</h2>
                     <pre class="fragment fade-in"><code>
             public double size(List&lt;Product&gt; items) {
@@ -298,15 +315,10 @@
                 return size;
             }
                     </code></pre>
-                        <aside class="notes">
-                            <ul>
-                                <li>obligé de modifier pour ajouter une forme</li>
-                                <li>je vais oublier</li>
-                                <li>je n'aurais pas d'erreur si j'oublie</li>
-                                <li>parsing fichier</li>
-                            </ul>
-                        </aside>
-                    </section>
+                    <ul class="fragment fade-in">
+                        <li>Meilleur évolutivitée</li>
+                    </ul>
+                </section>
                 <section>
                     <h2>Liskov substitution</h2>
                     <pre class="fragment fade-in"><code>
