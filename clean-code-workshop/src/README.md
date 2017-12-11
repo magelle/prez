@@ -33,3 +33,23 @@ Les outils :
 
 
 
+Remarques :
+
+ - Bien caractériser le niveau de la formation
+ - SOLID : Faire un avant après chercher exemples
+   - Trouver des exemples un peu original (ex: injecion de comportement, ...)
+   - exemples : http://www.cvc.uab.es/shared/teach/a21291/temes/object_oriented_design/materials_adicionals/principles_and_patterns.pdf
+ - Préciser les avantages dans les slides
+ - Injection dépendances (préciser avantage pour les tests)
+ - Kata:
+  - Un kata avec objectifs
+  - quels kata
+ - Mieux visualiser le déroulement
+ - Cheat sheet (pour kata)
+ - Distinguer écriture de code et design
+ - Dans la réalisation : 
+  - faire un mob programming
+  - du pair programming
+  - des code reviews
+ - Documentation, livres, articles
+

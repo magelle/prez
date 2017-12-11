@@ -118,19 +118,27 @@ AddressException, MessagingException {
     <section>
         <h2>Open / close principle</h2>
         <pre class="fragment fade-in"><code>
-public double Area(Object[] shapes) {
-    double area = 0;
-    foreach (Shape shape : shapes) {
-        if (shape instanceof Rectangle) {
-            Rectangle rectangle = (Rectangle) shape;
-            area += rectangle.getWidth() * rectangle.getHeight();
+public double size(List&lt;Product&gt; items) {
+    double size = 0; // cm3
+    for (Product item : items) {
+        if (item.type().equals("cd")) {    
+            size += 175;
         }
-        else if (shape instanceof Circle) {
-            Circle circle = (Circle) shape;
-            area += circle.getRadius() * circle.getRadius() * PI;
+        else if (item.type().equals("dvd")) {    
+            size += 403.92;
+        }
+        else if (item.type().equals("Cassette Vidéo")) {    
+            size += 7687,5;
+        }
+        else if (item.type().equals("Poster")) {    
+            size += Math.PI * Math.pow(10, 2) * item.width;
+        }
+        // ...
+        else if (item.heigth != null &amp;&amp; item.width != null &amp;&amp; item.depth != null) {    
+            size += item.heigth * item.width * item.depth;
         }
     }
-    return area;
+    return size;
 }
     </code></pre>
         <aside class="notes">
@@ -143,33 +151,48 @@ public double Area(Object[] shapes) {
         </aside>
     </section>
     <section>
+            <h2>Open / close principle</h2>
+            <pre><code>
+public double size(List&lt;Product&gt; items) {
+    double size = 0; // cm3
+    for (Product item : items) {
+        size += item.getSize();
+    }
+    return size;
+}
+        </code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>obligé de modifier pour ajouter une forme</li>
+                    <li>je vais oublier</li>
+                    <li>je n'aurais pas d'erreur si j'oublie</li>
+                    <li>parsing fichier</li>
+                </ul>
+            </aside>
+        </section>
+    <section>
         <h2>Liskov substitution</h2>
         <pre class="fragment fade-in"><code>
-public class Rectangle {
-    private int width;
-    private int height;
-    public void setWidth(int width) { this.width = width; }
-    public void setHeight(int height) { this.height = height; }
-}
+List&lt;String&gt; emails = Collections.unmodifiableList();
+// ... plus loin dans le code
+strings.add("maxime.gelle@novencia.com");
+// Compile but throw UnsupportedOperationException
 
-public class Carre extends rectangle {
-    private int side;
-    public void setWidth(int width) { this.side = width; }
-    public void setHeight(int height) { this.side = height; }
-}
+List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+name.add("Maxime GELLE"); // Works !
+</code></pre>
+        <pre class="fragment fade-in"><code>
+UnmodifiableList&lt;String&gt; emails = Collections.unmodifiableList();
+strings.add("maxime.gelle@novencia.com"); // Don't compile
 
-rectange.setHeight(4);
-rectange.setHeight(5);
-    </code></pre>
+List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+name.add("Maxime GELLE"); // Works !
+</code></pre>
         <aside class="notes">
             <ul>
                 <li>une implementation doit être remplacable par n'importe quel implémentation</li>
                 <li>ex : HashMap, TreeMap</li>
                 <li>interface = contrat</li>
-                <li>ici : carré etend de rectangle</li>
-                <li>mais carré n'a qu'une donnée side</li>
-                <li>carré ne respecte pas le contrat de rectangle</li>
-                <li>provoque des comportements étrange</li>
             </ul>
         </aside>
     </section>
@@ -177,17 +200,29 @@ rectange.setHeight(5);
         <h2>Interface segregation</h2>
         <pre class="fragment fade-in"><code>
 public class User {
-    private String firstname;
-    private String lastname;
-    private String email;
+    private String firstname, lastname, email;
     private List&lt;Item&gt; purchasedItems;
-    private ShoppingCart shoppingCart;
-    private PaymentDetails paymentDetails;
+    private List&ltProduct&gt; cartProductIds;
+    private String address1;
+    private String address2;
+    private String zipCode;
+    private String city;
+    private Integer lastPurchaseId;
+    private List&lt;Integer&gt; allPurchaseIds; 
 }
     </code></pre>
+        <pre class="fragment fade-in"><code>
+public class Recipient {
+    private String firstname, lastname, email;
+    private String address1;
+    private String address2;
+    private String zipCode;
+    private String city;
+}
+        </code></pre>
         <aside class="notes">
             <p>User a l'air d'être complet cependant il n'a pas une forte cohésion.</p>
-            <p>En effet purchasedItems va être utiliser pour la recommandation</p>
+            <p>Suivant les usages, tout n'est pas rempli</p>
             <p>shoppingCart et paymentDetails pour la finalisation de la commande</p>
             <p>Il sera impossible de relocaliser ces données (ex: purchasedItems dans une basse doc) sans un gros Travail
                 de refacto</p>
@@ -196,18 +231,34 @@ public class User {
     <section>
         <h2>Dependency inversion</h2>
         <pre class="fragment fade-in"><code>
-public class DatasourcePoolWatcher {
+public class CartService {
 
-    EventLogWriter writer = null;
+    public void validate(Cart cart) {
+        EmailService emailService = new EmailService();
+        PaypalService paypalService = new PaypalService(); 
+        SippingService shippingService = new LaPosteService();
 
-    public void Notify(String message) {
-        if (writer == null) {
-            writer = new EventLogWriter();
-        }
-        writer.write(message);
+        paypalService.makePayment(cart.getUser(), cart.sum());
+        emailService.sendCartValidatedMail();
+        shippingService.ship(cart.getUser(), cart.getItems());
     }
 }
-    </code></pre>
+        </code></pre>
+        <pre class="fragment fade-in"><code>
+public class CartService {
+
+    CartService(MessageService emailService, SippingService shippingService) {
+        this.emailService = emailService;
+        this.shippingService = shippingService;
+    }
+
+    public void validate(Cart cart, PaymentService paymentService) {
+        paypalService.makePayment(cart.getUser(), cart.sum());
+        emailService.sendCartValidatedMail();
+        shippingService.ship(cart.getUser(), cart.getItems());
+    }
+}       
+        </code></pre>
         <aside class="notes">
             <p>Je ne peux pas changer EventLogWriter par une autre classe</p>
             <p>ex: EmailNotifier</p>
