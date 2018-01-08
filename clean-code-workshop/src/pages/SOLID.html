@@ -1,0 +1,230 @@
+<section>
+    <section>
+        <h2>SOLID</h2>
+        <ul>
+            <li>
+                <b>S</b>ingle responsibility principle</li>
+            <li>
+                <b>O</b>pen close principle</li>
+            <li>
+                <b>L</b>iskov substitution</li>
+            <li>
+                <b>I</b>nterface segregation</li>
+            <li>
+                <b>D</b>ependency inversion</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Single Responsability Principle</h2>
+        <pre class="fragment fade-out"><code>
+public void sendGreetings(String fileName, XDate xDate,
+String smtpHost, int smtpPort)
+throws IOException, ParseException,
+AddressException, MessagingException {
+
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = "";
+    str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+        // parse line
+        String[] employeeData = str.split(", ");
+        Employee employee = new Employee(employeeData[1], employeeData[0],
+                        employeeData[2], employeeData[3]);
+        if (employee.isBirthday(xDate)) {
+            // Send mail
+            String recipient = employee.getEmail();
+            String body = "Happy Birthday, dear %NAME%"
+                            .replace("%NAME%", employee.getFirstName());
+            String subject = "Happy Birthday!";
+            sendMessage(smtpHost, smtpPort, "sender@here.com",
+            subject, body, recipient);
+        }
+    }
+}
+    </code></pre>
+        <span class="fragment fade-in">
+            <pre><code>
+public void sendGreetings(Date date) {
+    for(Employee employee : employees) {
+        if (employee.isBirthday(date)) {
+            messageService.sendBirthdayGreetingsMessage(employee);
+        }
+    }
+}
+        </code></pre>
+            <ul>
+                <li>Une seule responssabilité</li>
+                <li>Une seule raison de changer</li>
+                <li>Testabilité</li>
+                <li>Lisibilité</li>
+                <li>Maintenable</li>
+                <li>Réutilisable</li>
+            </ul>
+        </span>
+        <aside class="notes">
+            <ul>
+                <li>parsing fichier</li>
+                <li>Envoie mail</li>
+                <li>Création mail</li>
+                <li>filtre des employé</li>
+                <li>Je ne peux rien réutiliser</li>
+                <li>Je devrais dupliquer</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Open / close principle</h2>
+        <pre class="fragment fade-out"><code>
+public double size(List&lt;Product&gt; items) {
+    double size = 0; // cm3
+    for (Product item : items) {
+        if (item.type().equals("cd")) {    
+            size += 175;
+        }
+        else if (item.type().equals("dvd")) {    
+            size += 403.92;
+        }
+        else if (item.type().equals("Cassette Vidéo")) {    
+            size += 7687,5;
+        }
+        else if (item.type().equals("Poster")) {    
+            size += Math.PI * Math.pow(10, 2) * item.width;
+        }
+        // ...
+        else if (item.heigth != null &amp;&amp; item.width != null &amp;&amp; item.depth != null) {    
+            size += item.heigth * item.width * item.depth;
+        }
+    }
+    return size;
+}
+    </code></pre>
+        <span class="fragment fade-in">
+            <pre><code>
+public double size(List&lt;Product&gt; items) {
+    double size = 0; // cm3
+    for (Product item : items) {
+        size += item.getSize();
+    }
+    return size;
+}
+        </code></pre>
+            <ul class="fragment fade-in">
+                <li>Meilleur évolutivitée</li>
+                <li></li>
+            </ul>
+            <aside class="notes">
+                <ul>
+                    <li>obligé de modifier pour ajouter une forme</li>
+                    <li>je vais oublier</li>
+                    <li>je n'aurais pas d'erreur si j'oublie</li>
+                    <li>parsing fichier</li>
+                </ul>
+            </aside>
+        </span>
+    </section>
+    <section>
+        <h2>Liskov substitution</h2>
+        <pre class="fragment fade-in"><code>
+List&lt;String&gt; emails = Collections.unmodifiableList();
+// ... plus loin dans le code
+strings.add("maxime.gelle@novencia.com");
+// Compile but throw UnsupportedOperationException
+
+List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+name.add("Maxime GELLE"); // Works !
+</code></pre>
+        <span class="fragment fade-in">
+            <pre><code>
+UnmodifiableList&lt;String&gt; emails = Collections.unmodifiableList();
+strings.add("maxime.gelle@novencia.com"); // Don't compile
+
+List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+name.add("Maxime GELLE"); // Works !
+</code></pre>
+            <ul>
+                <li>Erreur à la compilation</li>
+                <li>Pas au runtime</li>
+                <li>Evite l'apparation de bugs</li>
+            </ul>
+        </span>
+        <aside class="notes">
+            <ul>
+                <li>une implementation doit être remplacable par n'importe quel implémentation</li>
+                <li>ex : HashMap, TreeMap</li>
+                <li>interface = contrat</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <h2>Interface segregation</h2>
+        <pre class="fragment fade-in"><code>
+public class User {
+    private String firstname, lastname, email;
+    private List&lt;Item&gt; purchasedItems;
+    private List&ltProduct&gt; cartProductIds;
+    private String address1;
+    private String address2;
+    private String zipCode;
+    private String city;
+    private Integer lastPurchaseId;
+    private List&lt;Integer&gt; allPurchaseIds; 
+}
+    </code></pre>
+        <pre class="fragment fade-in"><code>
+public class Recipient {
+    private String firstname, lastname, email;
+    private String address1;
+    private String address2;
+    private String zipCode;
+    private String city;
+}
+        </code></pre>
+        <aside class="notes">
+            <p>User a l'air d'être complet cependant il n'a pas une forte cohésion.</p>
+            <p>Suivant les usages, tout n'est pas rempli</p>
+            <p>shoppingCart et paymentDetails pour la finalisation de la commande</p>
+            <p>Il sera impossible de relocaliser ces données (ex: purchasedItems dans une basse doc) sans un gros Travail de
+                refacto
+            </p>
+        </aside>
+    </section>
+    <section>
+        <h2>Dependency inversion</h2>
+        <pre class="fragment fade-in"><code>
+public class CartService {
+
+    public void validate(Cart cart) {
+        EmailService emailService = new EmailService();
+        PaypalService paypalService = new PaypalService(); 
+        SippingService shippingService = new LaPosteService();
+
+        paypalService.makePayment(cart.getUser(), cart.sum());
+        emailService.sendCartValidatedMail();
+        shippingService.ship(cart.getUser(), cart.getItems());
+    }
+}
+        </code></pre>
+        <pre class="fragment fade-in"><code>
+public class CartService {
+
+    CartService(MessageService emailService, SippingService shippingService) {
+        this.emailService = emailService;
+        this.shippingService = shippingService;
+    }
+
+    public void validate(Cart cart, PaymentService paymentService) {
+        paypalService.makePayment(cart.getUser(), cart.sum());
+        emailService.sendCartValidatedMail();
+        shippingService.ship(cart.getUser(), cart.getItems());
+    }
+}       
+        </code></pre>
+        <ul>
+            <li>Testabilité</li>
+        </ul>
+        <aside class="notes">
+            <p>Je ne peux pas changer EventLogWriter par une autre classe</p>
+            <p>ex: EmailNotifier</p>
+        </aside>
+    </section>
+</section>

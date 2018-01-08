@@ -1,50 +1,262 @@
 <section>
-    <h2>Clean code</h2>
-    <section></section>
+    <h2>Coder proprement</h2>
+</section>
+<section>
+    <h2>Le nommage</h2>
     <section>
-        <h3>Des noms</h3>
-        <ul class="fragment fade-in">
-            <li>Significatif - révélateur</li>
-            <li>Eviter les codes, acronymes</li>
-            <li>Distinctions</li>
-            <li>Un mot par concept</li>
-            <li>Choisir des noms du métier</li>
-            <li>Ajouter du context</li>
-        </ul>
-        <aside class="notes">
-            <ul>
-                <li>toto interdit - que contient - que fait</li>
-                <li></li>
-            </ul>
-        </aside>
+        <b>Significatif</b>
+        <pre><code>getCartPrice()</code></pre> 
+        plutôt que
+        <pre><code>compute()</code></pre>
     </section>
     <section>
-        <h3>Fonctions et méthodes</h3>
-        <ul class="fragment fade-in">
-            <li>Courtes</li>
-            <li>Font une seule chose</li>
-            <li>Un seul niveau d'abstraction</li>
-            <li>éviter les side effects</li>
-        </ul>
-        <aside class="notes"></aside>
+        <b>Eviter les codes, acronymes</b>
+        <pre><code>paymentSystemProvider</code></pre> 
+        plutôt que
+        <pre><code>psp</code></pre>
     </section>
     <section>
-        <h3>Commentaires</h3>
-        <ul class="fragment fade-in">
-            <li>Ne doit pas compenser le mauvais code</li>
-            <li>Explique pourquoi</li>
-            <li>// TODO: </li>
-        </ul>
-        <aside class="notes"></aside>
+        <b>Distinctions</b>
+        <pre><code>taxInclusivePrice, preTaxPrice</code></pre> 
+        plutôt que
+        <pre><code>price, preTaxPrice</code></pre>
     </section>
     <section>
-        <h3>Programmation Objet (et classes)</h3>
-        <ul class="fragment fade-in">
-            <li>Cacher la structure interne</li>
-            <li>Une seule responsabilité</li>
-            <li>Eviter l'héritage</li>
-            <li>Favoriser la composition</li>
-        </ul>
-        <aside class="notes"></aside>
+        <b>Un mot par concept</b>
+        <pre><code>Cart</code></pre>
+        plutôt que
+        <pre><code>ShoppingList, ShoppingItems, ItemsToBuy, items, ...</code></pre>
+    </section>
+    <section>
+        <b>Choisir des noms du métier</b>
+        <pre><code>Buyer, Seller</code></pre>
+        plutôt que
+        <pre><code>User</code></pre>
+    </section>
+</section>
+<section>
+    <h2>Fonctions et méthodes</h2>
+    <section>
+        <b>Courtes</b>
+        <pre><code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort) {
+    for(Customer customer : readCustomersFromFile(fileName)) {
+        if (customer.isBirthday(date)) 
+            this.sendBirthdayGreetingsMessage(customer, smtpHost, smtpPort);
+    }
+}</code>
+        plutôt que
+        <code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort) {
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = "";
+    str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+        String[] customerData = str.split(", ");
+        Customer customer = new Customer(customerData[1], customerData[0], customerData[2], customerData[3]);
+        if (customer.isBirthday(date)) {
+            String recipient = customer.getEmail();
+            String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
+            String subject = "Happy Birthday!";
+            sendMessage(smtpHost, smtpPort, "sender@here.com",
+            subject, body, recipient);
+        }
+    }
+}</code></pre>        
+    </section>
+    <section>
+        <b>Font une seule chose</b>
+        <pre><code>public void sendGreetings(Date date, List&lt;Customer&gt; customers ) {
+    for(Customer customer : customers) {
+        if (customer.isBirthday(date))
+            messageService.sendBirthdayGreetingsMessage(customer);
+    }
+}</code>
+        plutôt que
+        <code>public void sendGreetings(String fileName, Date Date, String smtpHost, int smtpPort) {
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = "";
+    str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+        String[] customerData = str.split(", ");
+        Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
+        if (customer.isBirthday(date)) {
+            String recipient = customer.getEmail();
+            String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
+            String subject = "Happy Birthday!";
+            sendMessage(smtpHost, smtpPort, "sender@here.com",
+            subject, body, recipient);
+        }
+    }
+}</code></pre>      
+    </section>
+    <section>
+        <b>Un seul niveau d'abstraction</b>
+        <pre><code>public void sendGreetings(Date date, List&lt;Customer&gt; customers ) {
+    for(Customer customer : customers) {
+        if (customer.isBirthday(date))
+            messageService.sendBirthdayGreetingsMessage(customer);
+    }
+}</code>
+        plutôt que
+        <code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort)  {
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = "";
+    str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+        String[] customerData = str.split(", ");
+        Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
+        if (customer.isBirthday(date)) {
+            String recipient = customer.getEmail();
+            String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
+            String subject = "Happy Birthday!";
+            sendMessage(smtpHost, smtpPort, "sender@here.com",
+            subject, body, recipient);
+        }
+    }
+}</code></pre>
+    </section>
+    <section>
+        <b>Eviter les side effects</b>
+        <pre><code>public void filterByBirthday(Date date, List&lt;Customer&gt; customers) {
+    return customers.stream()
+                    .filter(customer -> customer.isBirthday(date))
+                    .collect(toList());
+    }
+}</code>
+        plutôt que
+        <code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort) {
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = "";
+    str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+        String[] customerData = str.split(", ");
+        Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
+        if (customer.isBirthday(xDate)) {
+            String recipient = customer.getEmail();
+            String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
+            String subject = "Happy Birthday!";
+            sendMessage(smtpHost, smtpPort, "sender@here.com",
+            subject, body, recipient);
+        }
+    }
+}</code></pre>
+    </section>
+</section>
+<section>
+    <h2>Commentaires</h2>
+    <section>
+        <b>Ne doit pas compenser le mauvais code</b>
+        <pre><code>public void sendGreetings(String fileName, XDate xDate,
+String smtpHost, int smtpPort)
+throws IOException, ParseException,
+AddressException, MessagingException {
+
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String str = "";
+    str = in.readLine(); // skip header
+    while ((str = in.readLine()) != null) {
+        // parse line
+        String[] customerData = str.split(", ");
+        Customer customer = new Customer(customerData[1], customerData[0],
+                        customerData[2], customerData[3]);
+        if (customer.isBirthday(xDate)) {
+            // Send mail
+            String recipient = customer.getEmail();
+            String body = "Happy Birthday, dear %NAME%"
+                            .replace("%NAME%", customer.getFirstName());
+            String subject = "Happy Birthday!";
+            sendMessage(smtpHost, smtpPort, "sender@here.com",
+            subject, body, recipient);
+        }
+    }
+}</code></pre>
+    </section>
+    <section>
+        <b>Explique pourquoi</b>
+        <pre><code>
+String str = "";
+str = in.readLine(); // skip header
+while ((str = in.readLine()) != null) {
+</code></pre>            
+    </section>
+    <section>
+        <b>// TODO: </b>
+        <p>Quand les recherchez-vous ?</p>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Programmation Objet (et classes)</h2>
+    </section>
+    <section>
+        <b>Cacher la structure interne</b>
+        <pre><code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort)
+                throws IOException, ParseException, AddressException, MessagingException {
+...</code></pre>
+    </section>
+    <section>
+        <b>Une seule responsabilité</b>
+        <pre><code>public class GreetingService {
+
+    public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort)
+    throws IOException, ParseException, AddressException, MessagingException {
+        for(Customer customer : readCustomersFromFile(fileName))
+            if (customer.isBirthday(xDate)) {
+                this.sendMail(customer, smtpHost, smtpPort);
+            }
+        }
+    }
+
+    private List&lt;Customer&gt; readCustomersFromFile(String filename) {
+        BufferedReader in = new BufferedReader(new FileReader(fileName));
+        String str = "";
+        str = in.readLine(); // skip header
+        List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();
+        while ((str = in.readLine()) != null) {
+            // parse line
+            String[] customerData = str.split(", ");
+            customers.add(new Customer(customerData[1], customerData[0],
+                            customerData[2], customerData[3]));
+        }
+        return customers
+    }
+
+    private void sendMail(Customer customer, String smtpHost, int smtpPort) {
+        // Send mail
+        String recipient = customer.getEmail();
+        String body = "Happy Birthday, dear %NAME%"
+                        .replace("%NAME%", customer.getFirstName());
+        String subject = "Happy Birthday!";
+        sendMessage(smtpHost, smtpPort, "sender@here.com",
+        subject, body, recipient);
+    }
+}</code></pre>
+    </section>
+    <section>
+        <b>Eviter l'héritage</b>
+        <pre><code>
+Product -> Book -> BD - Commics
+        -> CD / Disque
+        Livre audio ???
+</code></pre>
+    </section>
+    <section>
+        <b>Favoriser la composition</b>
+        <pre><code>
+BD / Commics {
+    BaseProductInfo
+    BookInfo
+    volume number
+}
+Livre audio {
+    BaseProductInfo
+    BookInfo
+    Extract
+}
+CD {
+    BaseProductInfo
+    MusiqueInfo
+    Extract
+}
+</code></pre>
     </section>
 </section>

@@ -85,7 +85,8 @@ body {
   visibility: inherit; }
   .reveal .slides section .fragment.fade-out.visible {
     opacity: 0;
-    visibility: hidden; }
+    visibility: hidden;
+    display: none; }
 
 .reveal .slides section .fragment.semi-fade-out {
   opacity: 1;
