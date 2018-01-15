@@ -127,37 +127,69 @@
                 </section>
             </section>
             <section>
-                <h3>Fonctions et méthodes</h3>
                 <section>
-                    <b>Courtes</b>
-                    <pre><code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort) {
-                for(Customer customer : readCustomersFromFile(fileName)) {
-                    if (customer.isBirthday(date)) 
-                        this.sendBirthdayGreetingsMessage(customer, smtpHost, smtpPort);
-                }
-            }</code>
+                    <b>Fonctions courtes</b>
+                    <pre><code>public void updateQuality() {
+                Arrays.stream(items).forEach(item ->
+                    updateQuality(item)
+                )
+            }</code></pre>
                     plutôt que
-                    <code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort) {
-                BufferedReader in = new BufferedReader(new FileReader(fileName));
-                String str = "";
-                str = in.readLine(); // skip header
-                while ((str = in.readLine()) != null) {
-                    // Read customers
-                    String[] customerData = str.split(", ");
-                    Customer customer = new Customer(customerData[1], customerData[0], customerData[2], customerData[3]);
-                    if (customer.isBirthday(date)) {
-                        // Send mail
-                        String recipient = customer.getEmail();
-                        String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
-                        String subject = "Happy Birthday!";
-                        sendMessage(smtpHost, smtpPort, "sender@here.com",
-                        subject, body, recipient);
-                    }
-                }
-            }</code></pre>        
+                    <pre><code>public void updateQuality() {
+                        for (int i = 0; i < items.length; i++) {
+                            if (!items[i].name.equals("Aged Brie")
+                                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                                if (items[i].quality > 0) {
+                                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                                        items[i].quality = items[i].quality - 1;
+                                    }
+                                }
+                            } else {
+                                if (items[i].quality < 50) {
+                                    items[i].quality = items[i].quality + 1;
+                
+                                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                                        if (items[i].sellIn < 11) {
+                                            if (items[i].quality < 50) {
+                                                items[i].quality = items[i].quality + 1;
+                                            }
+                                        }
+                
+                                        if (items[i].sellIn < 6) {
+                                            if (items[i].quality < 50) {
+                                                items[i].quality = items[i].quality + 1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                
+                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                                items[i].sellIn = items[i].sellIn - 1;
+                            }
+                
+                            if (items[i].sellIn < 0) {
+                                if (!items[i].name.equals("Aged Brie")) {
+                                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                                        if (items[i].quality > 0) {
+                                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                                                items[i].quality = items[i].quality - 1;
+                                            }
+                                        }
+                                    } else {
+                                        items[i].quality = items[i].quality - items[i].quality;
+                                    }
+                                } else {
+                                    if (items[i].quality < 50) {
+                                        items[i].quality = items[i].quality + 1;
+                                    }
+                                }
+                            }
+                        }
+                    }</code></pre>        
                 </section>
                 <section>
-                    <b>Font une seule chose</b>
+                    <b>Fonction : un seul objectif</b>
                     <pre><code>public void sendGreetings(Date date, List&lt;Customer&gt; customers ) {
                 for(Customer customer : customers) {
                     if (customer.isBirthday(date))
@@ -185,22 +217,21 @@
             }</code></pre>      
                 </section>
                 <section>
-                    <b>Un seul niveau d'abstraction</b>
-                    <pre><code>public void sendGreetings(Date date, List&lt;Customer&gt; customers ) {
-                for(Customer customer : customers) {
+                    <b>Function : Un niveau d'abstraction (SLAP)</b>
+                    <pre><code>public void sendGreetings(Date date) {
+                for(Customer customer : customerRepository.findAll()) {
                     if (customer.isBirthday(date))
                         messageService.sendBirthdayGreetingsMessage(customer);
                 }
-            }</code>
+            }</code></pre>
                     plutôt que
-                    <code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort)  {
-                BufferedReader in = new BufferedReader(new FileReader(fileName));
-                String str = "";
-                str = in.readLine(); // skip header
-                while ((str = in.readLine()) != null) {
+                    <pre><code>public void sendGreetings(Date date, String smtpHost, int smtpPort)  {
+                Connection conn = DriverManager.getConnection(url, user, passwd);
+                Statement state = conn.createStatement();
+                ResultSet result = state.executeQuery("SELECT email, firstname, lastname, birthday FROM customer");
+                while(result.next()){
                     // Read customers
-                    String[] customerData = str.split(", ");
-                    Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
+                    Customer customer = new Customer(result.getString("email"), result.getString("firstname"), result.getString("lastname"), result.getTimestamp("birthdate"));
                     if (customer.isBirthday(date)) {
                         // Send mail
                         String recipient = customer.getEmail();
@@ -213,32 +244,23 @@
             }</code></pre>
                 </section>
                 <section>
-                    <b>Eviter les side effects</b>
-                    <pre><code>public void filterByBirthday(Date date, List&lt;Customer&gt; customers) {
-                return customers.stream()
-                                .filter(customer -> customer.isBirthday(date))
-                                .collect(toList());
-                }
-            }</code>
-                    plutôt que
-                    <code>public void sendGreetings(String fileName, String smtpHost, int smtpPort) {
-                BufferedReader in = new BufferedReader(new FileReader(fileName));
-                String str = "";
-                str = in.readLine(); // skip header
-                while ((str = in.readLine()) != null) {
-                    // Read customers
-                    String[] customerData = str.split(", ");
-                    Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
-                    if (customer.isBirthday(this.date)) {
-                        // Send mail
-                        String recipient = customer.getEmail();
-                        String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
-                        String subject = "Happy Birthday!";
-                        sendMessage(smtpHost, smtpPort, "sender@here.com",
-                        subject, body, recipient);
-                    }
-                }
+                    <b>Fonction : éviter les side effects</b>
+                    <pre><code>if (customer.isBirthday(this.date)) {
+                // Send mail
+                String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
+                MailService mailService = new MailService(smtpHost, smtpPort);
+                mailService.sendMessage("sender@here.com", "Happy Birthday!, body, customer.getEmail());
             }</code></pre>
+                    plutôt que
+                    <pre><code>
+            if (customer.isBirthday(this.date)) {
+                // Send mail
+                String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
+                MailService mailService = new MailService();
+                mailService.setSmtpHost(smtpHost);
+                mailService.setSmtpPort(smtpPort);
+                mailService.sendMessage("sender@here.com", "Happy Birthday!, body, customer.getEmail());
+            </code></pre>
                 </section>
             </section>
             <section>
@@ -395,19 +417,6 @@
                         </ul>
                     </aside>
                 </section>
-                <section>
-                    <h2>SLAP</h2>
-                    <p>Single Layer Abstraction Principle</p>
-                    <aside class="notes">
-                        <ul>
-                            <li>Je ne vois qu'une couche</li>
-                            <li>pas de métier dans les DAO</li>
-                            <li>+ réutilisabilité</li>
-                            <li>+ testable</li>
-                            <li>+ lisible</li>
-                        </ul>
-                    </aside>
-                </section>
             </section>
             <section>
                 <section>
@@ -449,9 +458,6 @@
                         String subject = "Happy Birthday!";
                         sendMessage(smtpHost, smtpPort, "sender@here.com",
                         subject, body, recipient);
-                    }
-                }
-            }
                 </code></pre>
                     <span class="fragment fade-in">
                         <pre><code>
@@ -514,12 +520,13 @@
             public double size(List&lt;Product&gt; items) {
                 double size = 0; // cm3
                 for (Product item : items) {
-                    size += item.getSize();
+                    ShippingItem shippingItem = toShippingItem(item);
+                    size += shippingItem.getSize(item);
                 }
                 return size;
             }
                     </code></pre>
-                        <ul class="fragment fade-in">
+                        <ul>
                             <li>Meilleur évolutivitée</li>
                             <li></li>
                         </ul>
@@ -666,7 +673,7 @@
             <section>
                 <h2>Outils</h2>
                 <section>
-                    <h3>Your IDE</h3>
+                    <h3>Votre IDE</h3>
                 </section>
                 <section>
                     <h3>Sonarqube</h3>

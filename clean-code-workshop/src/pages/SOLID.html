@@ -38,9 +38,6 @@ AddressException, MessagingException {
             String subject = "Happy Birthday!";
             sendMessage(smtpHost, smtpPort, "sender@here.com",
             subject, body, recipient);
-        }
-    }
-}
     </code></pre>
         <span class="fragment fade-in">
             <pre><code>
@@ -103,12 +100,13 @@ public double size(List&lt;Product&gt; items) {
 public double size(List&lt;Product&gt; items) {
     double size = 0; // cm3
     for (Product item : items) {
-        size += item.getSize();
+        ShippingItem shippingItem = toShippingItem(item);
+        size += shippingItem.getSize(item);
     }
     return size;
 }
         </code></pre>
-            <ul class="fragment fade-in">
+            <ul>
                 <li>Meilleur évolutivitée</li>
                 <li></li>
             </ul>
