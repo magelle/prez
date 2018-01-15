@@ -55,6 +55,7 @@ Remarques :
 
 - Add XP perso : 
   - Refacto : tout le temps
-  - Test: test huat niveau = refacto plus facile
+  - séparer ce qui évolue de manière différentes
+  - Test: test haut niveau = refacto plus facile
 
 Try : https://github.com/bnjmnt4n/reveal-code-focus
