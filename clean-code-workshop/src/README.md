@@ -53,3 +53,8 @@ Remarques :
   - des code reviews
  - Documentation, livres, articles
 
+- Add XP perso : 
+  - Refacto : tout le temps
+  - Test: test huat niveau = refacto plus facile
+
+Try : https://github.com/bnjmnt4n/reveal-code-focus

@@ -2,7 +2,7 @@
     <h2>Coder proprement</h2>
 </section>
 <section>
-    <h2>Le nommage</h2>
+    <h3>Le nommage</h3>
     <section>
         <b>Significatif</b>
         <pre><code>getCartPrice()</code></pre> 
@@ -33,9 +33,14 @@
         plutôt que
         <pre><code>User</code></pre>
     </section>
+    <section>
+        <p>Rendre le code expressif</p>
+        <br/>
+        <blockquote>Et si j'était nouveau ?</blockquote>
+    </section>
 </section>
 <section>
-    <h2>Fonctions et méthodes</h2>
+    <h3>Fonctions et méthodes</h3>
     <section>
         <b>Courtes</b>
         <pre><code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort) {
@@ -50,9 +55,11 @@
     String str = "";
     str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
+        // Read customers
         String[] customerData = str.split(", ");
         Customer customer = new Customer(customerData[1], customerData[0], customerData[2], customerData[3]);
         if (customer.isBirthday(date)) {
+            // Send mail
             String recipient = customer.getEmail();
             String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
             String subject = "Happy Birthday!";
@@ -76,9 +83,11 @@
     String str = "";
     str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
+        // Read customers
         String[] customerData = str.split(", ");
         Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
         if (customer.isBirthday(date)) {
+            // Send mail
             String recipient = customer.getEmail();
             String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
             String subject = "Happy Birthday!";
@@ -102,9 +111,11 @@
     String str = "";
     str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
+        // Read customers
         String[] customerData = str.split(", ");
         Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
         if (customer.isBirthday(date)) {
+            // Send mail
             String recipient = customer.getEmail();
             String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
             String subject = "Happy Birthday!";
@@ -123,14 +134,16 @@
     }
 }</code>
         plutôt que
-        <code>public void sendGreetings(String fileName, Date date, String smtpHost, int smtpPort) {
+        <code>public void sendGreetings(String fileName, String smtpHost, int smtpPort) {
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String str = "";
     str = in.readLine(); // skip header
     while ((str = in.readLine()) != null) {
+        // Read customers
         String[] customerData = str.split(", ");
         Customer customer = new Customer(customerData[1], customerData[0],customerData[2], customerData[3]);
-        if (customer.isBirthday(xDate)) {
+        if (customer.isBirthday(this.date)) {
+            // Send mail
             String recipient = customer.getEmail();
             String body = "Happy Birthday, dear %NAME%".replace("%NAME%", customer.getFirstName());
             String subject = "Happy Birthday!";
@@ -233,30 +246,10 @@ while ((str = in.readLine()) != null) {
     </section>
     <section>
         <b>Eviter l'héritage</b>
-        <pre><code>
-Product -> Book -> BD - Commics
-        -> CD / Disque
-        Livre audio ???
-</code></pre>
+        <img alt="inheritance" src="images/inheritance.png" />
     </section>
     <section>
         <b>Favoriser la composition</b>
-        <pre><code>
-BD / Commics {
-    BaseProductInfo
-    BookInfo
-    volume number
-}
-Livre audio {
-    BaseProductInfo
-    BookInfo
-    Extract
-}
-CD {
-    BaseProductInfo
-    MusiqueInfo
-    Extract
-}
-</code></pre>
+        <img alt="composition" src="images/composition.png" />
     </section>
 </section>
