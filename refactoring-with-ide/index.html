@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <title>big</title>
+  <link href='big.css' rel='stylesheet' type='text/css' />
+  <link href='highlight.css' rel='stylesheet' type='text/css' />
+  <style>
+    .new-shiny { background: #aaaaaa; }
+  </style>
+  <script src='big.js'></script>
+  <script src='highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class='light'>
+  <div><h1 id="refactoring">Refactoring</h1>
+<p>Sans les mains</p>
+<p><em>\o/</em></p>
+</div>
+<div><p><em>mon collègue :</em></p>
+<blockquote>
+<p>C&#39;est compliqué ce code !</p>
+</blockquote>
+<p><em>moi :</em></p>
+<blockquote>
+<p>On devrait refactorer tout ça :)</p>
+</blockquote>
+<p><em>mon collègue :</em></p>
+<blockquote>
+<p>Mais, j&#39;ai peur de tout casser !</p>
+</blockquote>
+<p><em>moi :</em></p>
+<blockquote>
+<p>On va poser des TU</p>
+</blockquote>
+<p><em>mon collègue :</em></p>
+<blockquote>
+<p>Ce code est bien trop compliqué pour ça</p>
+</blockquote>
+<p><em>moi :</em></p>
+<blockquote>
+<p>Oui, il faudrait refactorer :&#39;(</p>
+</blockquote>
+</div>
+<div><h2 id="la-solution">La solution</h2>
+<p>demander à quelqu&#39;un de confiance : </p>
+<p><em>Votre IDE</em></p>
+</div>
+<div><h3 id="on-va-voir-">On va voir :</h3>
+<ul>
+<li>Pourquoi lui faire confiance ?</li>
+<li>Que sait faire votre IDE ?</li>
+<li>Quand ne pas le croire ?</li>
+</ul>
+</div>
+<div><h3 id="que-sait-faire-votre-ide-">Que sait faire votre IDE ?</h3>
+<ul>
+<li>Rename</li>
+<li>Extract<ul>
+<li>Variable</li>
+<li>Parameter</li>
+<li>Method</li>
+<li>Delegate</li>
+</ul>
+</li>
+<li>Inline</li>
+<li>Safe delete</li>
+<li>...</li>
+</ul>
+</div>
+<div><h3 id="pourquoi-lui-faire-confiance-">Pourquoi lui faire confiance ?</h3>
+<ul>
+<li>Il sait ce qu&#39;il fait</li>
+<li>Il sait dire non</li>
+<li>Il fait tout le boulot</li>
+</ul>
+</div>
+<div><h4 id="renommer">Renommer</h4>
+<ul>
+<li>Ajouter du sens</li>
+<li>Se rapprocher des termes du métier</li>
+<li>Suprimer les <em>compute</em>, <em>handle</em>, <em>toto</em>, ...</li>
+</ul>
+</div>
+<div><h4 id="extract-variable">Extract variable</h4>
+<ul>
+<li>Eviter les lignes trop lourdes</li>
+<li>Ajouter du sens avec un nom</li>
+<li>Limiter la duplication</li>
+</ul>
+</div>
+<div><h4 id="extract-m-thode-fonction">Extract méthode / fonction</h4>
+<ul>
+<li>Découper une grosse méthode</li>
+<li>Ajouter du sens avec un nom</li>
+<li>Limiter la duplication</li>
+<li>Peut-être mockée</li>
+</ul>
+</div>
+<div><h3 id="o-trouver-les-ces-fonctionnalit-s">Où trouver les ces fonctionnalités</h3>
+<ul>
+<li><em>IntelliJ</em> : menu <em>Refactor</em></li>
+<li><em>Eclipse</em> : menu <em>Refactor</em></li>
+<li><em>Visual Studio</em> : menu <em>Edit</em> &gt; <em>Refactor</em></li>
+</ul>
+</div>
+<div><h3 id="quand-ne-pas-le-croire-">Quand ne pas le croire ?</h3>
+<ul>
+<li>Usages externes</li>
+<li>Serialisation</li>
+<li>Tout ce qu&#39;il ne voit pas</li>
+</ul>
+</div>
+<div><h4 id="live-coding-">Live coding !!</h4>
+</div>
+</body>
+</html>

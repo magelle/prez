@@ -1,0 +1,17 @@
+{
+  "name": "refactoring-with-ide",
+  "version": "1.0.0",
+  "description": "a simple prez of what we can do with our IDE",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "big-presentation": "^3.2.0"
+  },
+  "scripts": {
+    "bp-init": "big-presentation-init",
+    "bp-serve": "big-presentation-serve",
+    "bp-offline": "big-presentation-offline",
+    "bp-compose": "big-presentation-compose",
+    "start": "yarn bp-compose && yarn bp-serve"
+  }
+}
