@@ -106,3 +106,17 @@ _Votre IDE_
 ---
 
 #### Live coding !!
+
+---
+
+#### #### Kata 
+
+https://github.com/emilybache/GildedRose-Refactoring-Kata
+
+https://github.com/emilybache/Tennis-Refactoring-Kata
+
+https://github.com/xpmatteo/birthday-greetings-kata
+
+https://github.com/xpmatteo/birthday-greetings-kata-csharp
+
+---
