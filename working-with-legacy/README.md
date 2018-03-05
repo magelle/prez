@@ -16,13 +16,13 @@
  - fonctionnalités trop complexe / pas utilisées
  - Besoins grossièrement semblable dans un même système
 
-- Le pire du pire
- - Vous ne connaissez pas le métier
- - vous n'avez pas accès aux utilisateurs
- - les utilisateurs ne connaissent pas l'application
- - l'application n'a pas de tests
- - Pas de tests de non régressions
- - code spagetti
+ - Le pire du pire
+  - Vous ne connaissez pas le métier
+  - vous n'avez pas accès aux utilisateurs
+  - les utilisateurs ne connaissent pas l'application
+  - l'application n'a pas de tests
+  - Pas de tests de non régressions
+  - code spagetti
 
 - Reconnaitre, detecter et prévenir l'apparition du code legacy
  - Quelques smells
