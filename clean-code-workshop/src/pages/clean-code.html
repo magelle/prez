@@ -136,7 +136,7 @@ if (customer.isBirthday(this.date)) {
     MailService mailService = new MailService();
     mailService.setSmtpHost(smtpHost);
     mailService.setSmtpPort(smtpPort);
-    mailService.sendMessage("sender@here.com", "Happy Birthday!, body, customer.getEmail());
+    mailService.sendMessage("sender@here.com", "Happy Birthday!", body, customer.getEmail());
 </code></pre>
 préférer
 <pre><code>if (customer.isBirthday(this.date)) {

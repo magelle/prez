@@ -125,7 +125,7 @@ public double size(List&lt;Product&gt; items) {
         <pre class="fragment fade-in"><code>
 List&lt;String&gt; emails = Collections.unmodifiableList();
 // ... plus loin dans le code
-strings.add("maxime.gelle@novencia.com");
+emails.add("maxime.gelle@novencia.com");
 // Compile but throw UnsupportedOperationException
 
 List&lt;String&gt; names = new ArrayList&lt;String&gt;();
@@ -181,7 +181,8 @@ public class Recipient {
             <p>User a l'air d'être complet cependant il n'a pas une forte cohésion.</p>
             <p>Suivant les usages, tout n'est pas rempli</p>
             <p>shoppingCart et paymentDetails pour la finalisation de la commande</p>
-            <p>Il sera impossible de relocaliser ces données (ex: purchasedItems dans une basse doc) sans un gros Travail de
+            <p>Il sera impossible de relocaliser ces données (ex: purchasedItems dans une basse doc)
+                sans un gros Travail de
                 refacto
             </p>
         </aside>
@@ -191,34 +192,28 @@ public class Recipient {
         <pre class="fragment fade-in"><code>
 public class CartService {
 
-    public void validate(Cart cart) {
-        EmailService emailService = new EmailService();
-        PaypalService paypalService = new PaypalService(); 
-        SippingService shippingService = new LaPosteService();
+    CartService(MessageService emailService, SippingService shippingService, PaypalService paypalService) {
 
-        paypalService.makePayment(cart.getUser(), cart.sum());
-        emailService.sendCartValidatedMail();
-        shippingService.ship(cart.getUser(), cart.getItems());
+    public void validate(Cart cart) {
+        User user = cart.getUser();
+        Paypal account = user.getPaypalAccount();
+        String paypalAccessToken = paypalService.getAccessToken(account);
+        paypalService.transfert(cart.sum(), account, MY_ESHOP_PAYPAL_ACCOUNT);
+        ...
     }
 }
         </code></pre>
         <pre class="fragment fade-in"><code>
 public class CartService {
-
-    CartService(MessageService emailService, SippingService shippingService) {
-        this.emailService = emailService;
-        this.shippingService = shippingService;
-    }
-
     public void validate(Cart cart, PaymentService paymentService) {
-        paypalService.makePayment(cart.getUser(), cart.sum());
-        emailService.sendCartValidatedMail();
-        shippingService.ship(cart.getUser(), cart.getItems());
+        paymentService.makePayment(cart.getUser(), cart.sum());
+        ...
     }
 }       
         </code></pre>
         <ul>
             <li>Testabilité</li>
+            <li>Maintenabilité</li>
         </ul>
         <aside class="notes">
             <p>Je ne peux pas changer EventLogWriter par une autre classe</p>
