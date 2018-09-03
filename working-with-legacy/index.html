@@ -1,0 +1,238 @@
+<!-- Site built using grunt includes! -->
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Working with Legacy</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Site built using grunt includes! -->
+				<section>
+				    <h1>Legacy code</h1>
+				    <h2>Novencia</h2>
+				</section>
+				<section>
+				    <h2>c'est quoi le legacy</h2>
+				    <h3 class="fragment fade-in">Le code hérité</h3>
+				</section>
+				<section>
+				    <h2>D'où vient le legacy ?</h2>
+				    <section></section>
+				    <section>
+				        <h3>Du développeur : Manque d'expérience</h3>
+				        <ul>
+				            <li>Faible compétence en design</li>
+				            <li>Faire "Quand on aura le temps"</li>
+				            <li>Pas de refactoring</li>
+				            <li>Manque de temps pour essayer / apprendre</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h3>De la team : manque de communication</h3>
+				        <ul>
+				            <li>Personne ne dit non</li>
+				            <li>Faible connaissance métier</li>
+				            <li>Faible connaissance technique</li>
+				            <li>Fonctionnalités trop complexe / inadaptés</li>
+				            <li>Bricolage de l'existant</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h3>De l'organisation : rigide</h3>
+				        <ul>
+				            <li>Urgence constante</li>
+				            <li>Turnover</li>
+				            <li>Peu de communication avec le métier</li>
+				            <li>Pas d'investissement technique</li>
+				        </ul>
+				    </section>
+				</section>
+				<section>
+				    <h3>Reconnaitre le legacy</h3>
+				    <section></section>
+				    <section>
+				        <h4>Codes smells</h4>
+				        <ul>
+				            <li class="fragment fade-in">Classes trop grandes</li>
+				            <li class="fragment fade-in">Méthodes trop grandes</li>
+				            <li class="fragment fade-in">Héritages très profonds</li>
+				            <li class="fragment fade-in">Mélange d'abstractions</li>
+				            <li class="fragment fade-in">Duplication</li>
+				            <li class="fragment fade-in">Primitive obsession</li>
+				            <li class="fragment fade-in">Mauvais nommages</li>
+				            <li class="fragment fade-in">...</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Peur de livrer</h4>
+				        <ul>
+				            <li class="fragment fade-in">Pas de test automatisés</li>
+				            <li class="fragment fade-in">Longue phase de tests</li>
+				            <li class="fragment fade-in">Beaucoup de régressions</li>
+				            <li class="fragment fade-in">Peu de livraisons</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Déconnexion du fonctionnel</h4>
+				        <ul>
+				            <li class="fragment fade-in">Perte de la connaissance métier</li>
+				            <li class="fragment fade-in">Perte du "sens métier"</li>
+				            <li class="fragment fade-in">Feature techniques</li>
+				            <li class="fragment fade-in">Sacred Code</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Resources</h4>
+				        <a href="https://sourcemaking.com/refactoring/smells">sourcemaking.com</a>
+				    </section>
+				</section>
+				<section>
+				    <h3>Intervenir dans le legacy</h3>
+				    <section></section>
+				    <section>
+				        <ul>
+				            <li class="fragment fade-in">Essayer de comprendre le code</li>
+				            <li class="fragment fade-in">Poser des tests</li>
+				            <li class="fragment fade-in">Refactorer</li>
+				            <li class="fragment fade-in">Communiquer</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Poser des tests sur le legacy</h4>
+				        <ul>
+				            <li class="fragment fade-in">Ne pas tout Tester</li>
+				            <li class="fragment fade-in">Tester ce qui va ou est souvent modifié</li>
+				            <li class="fragment fade-in">Refactoring avant tests</li>
+				            <li class="fragment fade-in">Utiliser la couverture d'exécution</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Refactoring avant tests</h4>
+				        <ul>
+				            <li class="fragment fade-in">Extract Method</li>
+				            <li class="fragment fade-in">Extract Class</li>
+				            <li class="fragment fade-in">Move Method</li>
+				            <li class="fragment fade-in">Utiliser l'IDE</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Tester le legacy</h4>
+				        <ul>
+				            <li class="fragment fade-in">Couverture d'exécution pour l'avancement</li>
+				            <li class="fragment fade-in">Utiliser Fake/Mock</li>
+				            <li class="fragment fade-in">Nommage des test</li>
+				            <li class="fragment fade-in">Faire attention à la lisibilité</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Refactorer</h4>
+				        <ul>
+				            <li class="fragment fade-in">Savoir où on souhaite aller</li>
+				            <li class="fragment fade-in">Petites étapes</li>
+				            <li class="fragment fade-in">Les tests passent toujours</li>
+				            <li class="fragment fade-in">Ne pas oublier les tests</li>
+				            <li class="fragment fade-in">
+				                <a href="https://sourcemaking.com/refactoring/refactorings">Sourcemaking</a>
+				            </li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Communiquer</h4>
+				        <ul>
+				            <li class="fragment fade-in">Le refactoring</li>
+				            <li class="fragment fade-in">Les mots fonctionnels utilisés</li>
+				            <li class="fragment fade-in">Les prochaines étapes</li>
+				            <li class="fragment fade-in">Les difficultés</li>
+				        </ul>
+				    </section>
+				</section>
+				<section>
+				    <h2>Reconnaitre, detecter et prévenir l'apparition du legacy</h2>
+				    <section>
+				        <h2></h2>
+				    </section>
+				    
+				    <section>
+				        <h3>Comprendre et modeliser le métier</h3>
+				    </section>
+				    <section>
+				        <h3>Séparer ce qui est différents</h3>
+				        <ul>
+				            <li>Technique VS Fonctionnel</li>
+				            <li>Bounded Context</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h3>Communiquer</h3>
+				        <ul>
+				            <li>Les zones à refactorer</li>
+				            <li>Les dangers du legacy</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h3>Refactorer Souvent</h3>
+				    </section>
+				</section>
+				<section>
+				    <h2>Intervenir dans legacy</h2>
+				    <section></section>
+				    <section>
+				        <h3>Passer sous test</h3>
+				        <ul>
+				            <li>Injection de dépendances</li>
+				            <li>Couverture de tests</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h3>Refactorer</h3>
+				        <ul>
+				            <li>Petits pas</li>
+				            <li>Les tests doivent être verts</li>
+				            <li>Ne pas oublier les tests</li>
+				        </ul>
+				    </section>
+				</section>
+				<section>
+				    <h2>Communiquer sur le legacy</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
