@@ -83,15 +83,6 @@
 				        </ul>
 				    </section>
 				    <section>
-				        <h4>Peur de livrer</h4>
-				        <ul>
-				            <li class="fragment fade-in">Pas de test automatisés</li>
-				            <li class="fragment fade-in">Longue phase de tests</li>
-				            <li class="fragment fade-in">Beaucoup de régressions</li>
-				            <li class="fragment fade-in">Peu de livraisons</li>
-				        </ul>
-				    </section>
-				    <section>
 				        <h4>Déconnexion du fonctionnel</h4>
 				        <ul>
 				            <li class="fragment fade-in">Perte de la connaissance métier</li>
@@ -101,19 +92,33 @@
 				        </ul>
 				    </section>
 				    <section>
-				        <h4>Resources</h4>
-				        <a href="https://sourcemaking.com/refactoring/smells">sourcemaking.com</a>
+				        <h4>Peur de livrer</h4>
+				        <ul>
+				            <li class="fragment fade-in">Pas de test automatisés</li>
+				            <li class="fragment fade-in">Longue phase de tests</li>
+				            <li class="fragment fade-in">Beaucoup de régressions</li>
+				            <li class="fragment fade-in">Peu de livraisons</li>
+				        </ul>
 				    </section>
 				</section>
 				<section>
 				    <h3>Intervenir dans le legacy</h3>
-				    <section></section>
 				    <section>
 				        <ul>
-				            <li class="fragment fade-in">Essayer de comprendre le code</li>
+				            <li class="fragment fade-in">Comprendre le métier</li>
+				            <li class="fragment fade-in">Comprendre le code</li>
 				            <li class="fragment fade-in">Poser des tests</li>
 				            <li class="fragment fade-in">Refactorer</li>
 				            <li class="fragment fade-in">Communiquer</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h4>Comprendre le métier</h4>
+				        <ul>
+				            <li class="fragment fade-in">Objectif du projet</li>
+				            <li class="fragment fade-in">Intégration dans l'écosystème</li>
+				            <li class="fragment fade-in">Langage métier</li>
+				            <li class="fragment fade-in">Event storming</li>
 				        </ul>
 				    </section>
 				    <section>
@@ -156,6 +161,20 @@
 				        </ul>
 				    </section>
 				    <section>
+				        <h4>Quoi refactorer</h4>
+				        <ul>
+				            <li class="fragment fade-in">Code métier</li>
+				            <li class="fragment fade-in">Code fonctionnel</li>
+				            <li class="fragment fade-in">Le front end</li>
+				            <li class="fragment fade-in">Les tests</li>
+				            <li class="fragment fade-in">La base de données</li>
+				            <li class="fragment fade-in">Les API</li>
+				            <li class="fragment fade-in">Le tooling (Build / Packaging / déploiement)</li>
+				            <li class="fragment fade-in">La configuration</li>
+				            <li class="fragment fade-in">...</li>
+				        </ul>
+				    </section>
+				    <section>
 				        <h4>Communiquer</h4>
 				        <ul>
 				            <li class="fragment fade-in">Le refactoring</li>
@@ -166,54 +185,55 @@
 				    </section>
 				</section>
 				<section>
-				    <h2>Reconnaitre, detecter et prévenir l'apparition du legacy</h2>
-				    <section>
-				        <h2></h2>
-				    </section>
-				    
-				    <section>
-				        <h3>Comprendre et modeliser le métier</h3>
-				    </section>
-				    <section>
-				        <h3>Séparer ce qui est différents</h3>
-				        <ul>
-				            <li>Technique VS Fonctionnel</li>
-				            <li>Bounded Context</li>
-				        </ul>
-				    </section>
-				    <section>
-				        <h3>Communiquer</h3>
-				        <ul>
-				            <li>Les zones à refactorer</li>
-				            <li>Les dangers du legacy</li>
-				        </ul>
-				    </section>
-				    <section>
-				        <h3>Refactorer Souvent</h3>
-				    </section>
-				</section>
-				<section>
-				    <h2>Intervenir dans legacy</h2>
+				    <h2>Limiter l'apparation du legacy</h2>
 				    <section></section>
 				    <section>
-				        <h3>Passer sous test</h3>
+				        <h3>Développer avec soin</h3>
 				        <ul>
-				            <li>Injection de dépendances</li>
-				            <li>Couverture de tests</li>
+				            <li class="fragment fade-in">Modéliser le métier</li>
+				            <li class="fragment fade-in">Ecrire des tests</li>
+				            <li class="fragment fade-in">Séparer technique et fonctionnel</li>
 				        </ul>
 				    </section>
 				    <section>
-				        <h3>Refactorer</h3>
+				        <h3>Travailler en équipe</h3>
 				        <ul>
-				            <li>Petits pas</li>
-				            <li>Les tests doivent être verts</li>
-				            <li>Ne pas oublier les tests</li>
+				            <li class="fragment fade-in">Code review</li>
+				            <li class="fragment fade-in">Pair / mob programming</li>
+				            <li class="fragment fade-in">Discussions méthodo / outils</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h3>L'architecture</h3>
+				        <ul>
+				            <li class="fragment fade-in">Anti Corruption Layer (ACL)</li>
+				            <li class="fragment fade-in">Architecture Hexagonale</li>
+				            <li class="fragment fade-in">Domain Driven Design</li>
+				        </ul>
+				    </section>
+				    <section>
+				        <h3>S'organiser</h3>
+				        <ul>
+				            <li class="fragment fade-in">Plannifier le refactoring</li>
+				            <li class="fragment fade-in">Avoir du temps pour essayer (time boxer)</li>
+				            <li class="fragment fade-in">Optimiser le flux plutôt que le temps de dev</li>
 				        </ul>
 				    </section>
 				</section>
 				<section>
-				    <h2>Communiquer sur le legacy</h2>
-				</section>
+				    <h2>Communiquer</h2>
+				    <section></section>
+				    <section>
+				        <h3>Montrer le risque pour le projet</h3>
+				        <ul>
+				            <li class="fragment fade-in">Nombre d'issues</li>
+				            <li class="fragment fade-in">Temps résolution d'issue</li>
+				            <li class="fragment fade-in">Temps de développement</li>
+				            <li class="fragment fade-in">Turn over</li>
+				            <li class="fragment fade-in">Temps d'onboarding</li>
+				            <li class="fragment fade-in">Les dev XP ne veulent pas venir</li>
+				        </ul>
+				    </section>
 			</div>
 		</div>
 
