@@ -1,0 +1,564 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Initiation à la programmation - Novencia</title>
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1>Programmation, Développement</h1>
+                    <h2>Initiation</h2>
+                </section>
+                <section>
+                    <h2>Le programme</h2>
+                    <ul>
+                        <li>The boring theory</li>
+                        <li>The funny part</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>The boring theory</h3>
+                    <ul>
+                        <li>La programmation</li>
+                        <li>La mémoire</li>
+                        <li>La donnée</li>
+                        <li>Les traitements</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>La programmation</h2>
+                    <blockquote>
+                        L'écriture, dans un langage de programmation donné, d'intructions qui seront transformés en éxécutable.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Le code</h2>
+                    <pre><code class="hljs" data-trim contenteditable>
+// Explain and guide beginners
+function programmationInitiation(attendees) {
+  explainProgrammationTo(attendees);
+  explainExerciseTo(attendees);
+  attendees.forEach(function (attendee) {
+    if (isBlocked(attendee)) {
+      tryToHelp(attendee);
+    }
+  });
+}
+                    </code></pre>
+                    <pre><code class="hljs" data-trim contenteditable>
+function add(a, b) {
+  return a + b
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Rendre le code exécutable</h2>
+                    <ul>
+                        <li>La compilation</li>
+                        <li>L'interprétation</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>L'éxécutable</h2>
+                </section>
+                <section>
+                    <h2>La <del>big</del> data</h2>
+                </section>
+                <section>
+                    <h2>Les variables</h2>    
+                    <pre><code class="hljs" data-trim contenteditable>
+var age;
+var age = 20;
+var age = age + 1;
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Les types de données</h2>
+                    <ul>
+                        <li>Les nombre<pre><code>var age = 30;</code></pre></li>
+                        <li>Les chaînes de caractères (strings)<pre><code>var prenom = "Maxime";</code></pre></li>
+                        <li>Les booléen <pre><code>var alive = true;
+var dead = false;</code></pre></li>
+                        <li>Nombres entier, nombres à décimaux, caractères, ...</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Organiser ses données</h2>
+                    <ul>
+                        <li>Les tableaux / listes<pre><code>
+var enfants = ["Elodie", 
+               "Maxime", 
+               "Amandine"];
+var enfant = enfants[0];
+                        </code></pre></li>
+                        <li>Les dictionnaires<pre><code>
+var enfants = { "aine": "Elodie", 
+                "cadet": "Maxime", 
+                "benjamin": "Amandine" };
+var nomDuCadet = enfants.cadet;
+                        </code></pre></li>
+                        <li>Ensembles, listes chainées, objects, ...</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Les opérateurs</h2>
+                    <ul>
+                        <li>Numériques<pre><code>
+var quatre = (3 * 3) / 3 + 2 - 1;
+var positif = entier >= 0;
+</code></pre></li>
+                        <li>Booléens<pre><code>var vrai = true;
+var faux = !vrai;
+vrai == true;
+vrai != faux;
+vrai && faux;
+vrai || faux;</code></pre></li>
+                        <li>String<pre><code>var prenom = "Maxime";
+var phrase = "Je suis " + prenom;</code></pre></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Les structures de contrôle</h2>
+                    <h3>Conditionelle : <strong>if</strong></h3>
+                    <pre><code>
+if (maxime.age > 30) {
+  return "oh, le vieux !!";
+} else {
+  return "ça va encore.";
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Les structures de contrôle</h2>
+                    <h3>Les boucles : for, while, ...</h3>
+                    <pre><code>
+var enfants = ["Elodie", "Maxime", "Amandine"];
+var nombreDEnfants = 0
+for (var index = 0; index < enfants.length; index++) {
+  nombreDEnfants = nombreDEnfants + 1;
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Organiser tout ça</h2>
+                    <h3>Les fonctions</h3>
+                    <pre><code>
+// Déclaration
+function addition(a, b) {
+  var c = a + b
+  return c;
+}
+// Usage
+var trente = addition(20, 10);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>L'exercice</h2>
+                    <h3>Le jeu de la vie</h3>
+                </section>
+                <!--Gif jeu de la vie -->
+                <section>
+                    <h2>Le jeu de la vie</h2>
+                    <img src="images/gospers_glider_gun.gif" />
+                </section>
+                <section>
+                    <h2>Le jeu de la vie</h2>
+                    <h3>Les règles</h3>
+                    <ul>
+                        <li>Une cellule morte ayant 3 voisines vivantes devient vivante (reproduction)</li>
+                        <li>Une cellule vivante ayant moins de 2 voisines meure (sous-population)</li>
+                        <li>Une cellule vivante ayant plus de 3 voisines vivantes meure (sur-population)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Le jeu de la vie</h2>
+                    <h3>Les règles</h3>
+                    <table>
+                        <thead>
+                            <tr><th>État avant</th><th>Voisines</th><th>État après</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Vivante</td><td>2 ou 3</td><td>Vivante</td></tr>
+                            <tr><td>Morte</td><td>3</td><td>Vivante</td></tr>
+                            <tr><td>Vivante</td><td>&lE;1</td><td>Morte</td></tr>
+                            <tr><td>Vivante</td><td>&gE;4</td><td>Morte</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h2>Le jeu de la vie</h2>
+                    <p>quelques exemples :</p>
+                    <img src="images/game_of_life_blinker.gif" />
+                    <br/>
+                    <img src="images/game_of_life_animated_lwss.gif" />
+                    <br/>
+                    <img src="images/98px-game_of_life_beehive-svg.png" />
+                </section>
+                <section>
+                    <h2>Le jeu de la vie</h2>
+                    <p>quelques exemples :</p>
+                    <img src="images/conways_game_of_life_breeder_animation.gif" />
+                </section>
+                <section>
+                    <h2>Le jeu de la vie</h2>
+                    <p>Comment représenter la grille ?</p>
+                    <p class="fragment fade-in">Une liste de listes</p>
+                    <pre class="fragment fade-in"><code>
+var liste = [1, 2, 3, 4];
+                    </code></pre>
+                    <pre class="fragment fade-in"><code>
+var listeDeListes = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+                    </code></pre>
+                    <pre class="fragment fade-in"><code>
+// true = cellule vivante, false = cellule morte
+var grid = [
+    [true, false, true], 
+    [false, true, false],
+    [true, false, true],
+];
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Le jeu de la vie</h2>
+                    <h3>à vous</h3>
+                    <a href="https://stackblitz.com/edit/initiation-prog">https://stackblitz.com/edit/initiation-prog</a>
+                    <p><strong>Faites un "fork" svp</strong></p>
+                    <a href="https://jsconsole.com/">https://jsconsole.com/</a>
+                </section>
+                <section>
+                    <p>index.js</p>
+                    <pre><code>
+function nextGen(grid) {
+  return grid;
+}
+
+function loop(grid) {
+  var grid = nextGen(grid);
+  display(grid);
+  setTimeout(() => loop(grid), 1000)
+}
+
+var initialtState = [
+  [false, true, false],
+  [false, true, false],
+  [false, true, false]
+];
+
+loop(initialtState);
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Étape 1 : parcourir les cellules</h3>
+                    <pre><code>
+> var grid = [
+    [false, true, false],
+    [false, true, false],
+    [false, true, false]
+];
+                    </code></pre>
+                    <pre class="fragment fade-in"><code>
+> grid.map(
+    (line, y) => line.map(
+        (cell, x) => x + ', ' + y
+    )
+);
+                    </code></pre>
+                    <pre class="fragment fade-in"><code>
+function nextGen(grid) {
+    return grid.map(
+        (line) => line.map(
+            (cell) => !cell
+        )
+    );
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Étape 2 : Naissance d'une cellule</h3>
+                    <p>Si une cellule a exactement trois voisines vivantes, elle devient vivante</p>
+                    <pre class="fragment fade-in"><code>
+function nextGen(grid) {
+    return grid.map(
+        (line, y) => line.map(
+            (cell, x) => aliveNeighbors(grid, x, y) == 3
+        )
+    );
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Étape 2.1 : Compter les voisines vivantes</h3>
+                    <pre class="fragment fade-in"><code>
+> var grid = [
+    [false, true, false],
+    [false, true, false],
+    [false, true, false]
+];  
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Étape 2.1.1 : Identifier une cellule</h3>
+                    <pre class="fragment fade-in"><code>
+var grid = [
+    [false, true, false],
+    [false, true, false],
+    [false, true, false]
+];
+> var x = 1;
+> var y = 1;
+> grid[y][x]; // true
+> x = 0;
+> grid[y][x]; // false
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Étape 2.1.2 : Identifier ses voisines</h3>
+                    <pre class="fragment fade-in"><code>
+grid[1][1];
+(0, 0) (1, 0) (2, 0)
+(0, 1) (1, 1) (2, 1)
+(0, 2) (1, 2) (2, 2)
+
+grid[y][x];
+(x-1, y-1)   (x, y-1)   (x+1, y-1)
+(x-1, y)     (x, y)     (x+1, y)
+(x-1, y+1)   (x, y+1)   (x+1, y+1)
+                    </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 2.1.2 : Identifier ses voisines</h3>
+                        <pre class="fragment fade-in"><code>
+function listNeighbors(x, y) {
+    return [
+        {x: x-1, y: y-1}, {x: x, y: y-1}, {x: x+1, y: y-1},
+        {x: x-1, y: y}, {x: x+1, y: y},
+        {x: x-1, y: y+1}, {x: x, y: y+1}, {x: x+1, y: y+1}
+    ];
+}
+> listNeighbors(1, 1)
+                        </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 2.1.3 : les bords du monde</h3>
+                        <pre class="fragment fade-in"><code>
+var grid = [
+    [false, true, false],
+    [false, true, false],
+    [false, true, false]
+];
+// Les voisins de la cellule 2, 2 ?
+(1, 1) (2, 1) (3, 1)
+(1, 2) (2, 2) (3, 2)
+(1, 3) (2, 3) (3, 3)
+> listNeighbors(2, 2)
+> grid[3][3] = ?
+                        </code></pre>
+                </section>
+                <section>
+                    <h3>Étape 2.1.3 : les bords du monde</h3>
+                    <pre class="fragment fade-in"><code>
+function isInboundaries(grid, coord) {
+    var width = grid[0].length;
+    var height = grid.length;
+    return coord.y >= 0 && coord.y < height && coord.x >= 0 && coord.x < width;
+}
+> isInboundaries(grid, {x: 1, y: 3})
+neighbors.filter((coord) => isInboundaries(grid, coord))
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Étape 2.1.4 : Compter les cellules vivantes</h3>
+                    <pre class="fragment fade-in"><code>
+var neighbors = [
+    [false, true, false],
+    [false, true, false],
+    [false, true, false]
+];
+// Combien de true ?
+                    </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 2.1.4 : Compter les cellules vivantes</h3>
+                        <pre class="fragment fade-in"><code>
+var neighbors = [
+    [false, true, false],
+    [false, true, false],
+    [false, true, false]
+];
+var aliveNeighbors = neighbors.filter((cell) => cell == true).length
+                        </code></pre>
+                    </section>
+                <section>
+                        <h3>Étape 2.1 : Compter les voisines vivantes</h3>
+                        <pre class="fragment fade-in"><code>
+function aliveNeighbors(grid, x, y) {
+    return listNeighbors(x, y)
+    .filter((coord) => isInboundaries(grid, coord))
+    .map((coord) => grid[coord.y][coord.x])
+    .filter((cell) => cell)
+    .length
+}
+                        </code></pre>
+                    </section>
+                <section>
+                        <h3>Étape 2 : Naissance d'une cellule</h3>
+                        <p>Si une cellule a exactement trois voisines vivantes, elle devient vivante.</p>
+                        <pre class="fragment fade-in"><code>
+function nextGen(grid) {
+    return grid.map(
+        (line, y) => line.map(
+            (cell, x) => aliveNeighbors(grid, x, y) == 3
+        )
+    );
+}
+                    </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 3 : Rien ne bouge</h3>
+                        <p>Si une cellule a exactement deux voisines vivantes, elle reste dans son état actuel.</p>
+                        <pre class="fragment fade-in"><code>
+function nextGen(grid) {
+    return grid.map(
+        (line, y) => line.map(
+            (cell, x) => {
+                if (aliveNeighbors(grid, x, y) == 3) {
+                    return true;
+                }
+                if (aliveNeighbors(grid, x, y) == 2) {
+                    return cell;
+                }
+            }
+        )
+    );
+}
+                    </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 4 : Mort d'une cellule</h3>
+                        <p>Si une cellule a strictement moins de deux ou strictement plus de trois voisines vivantes, elle meure.</p>
+                        <pre class="fragment fade-in"><code>
+function nextGen(grid) {
+    return grid.map(
+        (line, y) => line.map(
+            (cell, x) => {
+                if (aliveNeighbors(grid, x, y) == 3) {
+                    return true;
+                }
+                if (aliveNeighbors(grid, x, y) == 2) {
+                    return cell;
+                }
+                if (aliveNeighbors(grid, x, y) < 2 || aliveNeighbors(grid, x, y) > 3) {
+                    return false;
+                }
+            }
+        )
+    );
+}
+                    </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 5 : Les structures</h3>
+                        <p>Essayez différentes structures : le planeur</p>
+                        <pre class="fragment fade-in"><code>
+var _ = false;
+var O = true
+var initialtState = [
+    [_, O, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, O, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [O, O, O, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _]
+];
+                    </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 5 : Les structures</h3>
+                        <p>Essayez différentes structures : le petit exploreur</p>
+                        <pre class="fragment fade-in"><code>
+var initialtState = [
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, O, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, O, O, O, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, O, _, O, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, O, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _]
+];
+                    </code></pre>
+                </section>
+                <section>
+                        <h3>Étape 5 : Les structures</h3>
+                        <p>Essayez différentes structures : Ligne de 10 cellules</p>
+                        <pre class="fragment fade-in"><code>
+var initialtState = [
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, O, O, O, O, O, O, O, O, O, O, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _]
+];
+                    </code></pre>
+                </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                history: true,
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
+</html>
