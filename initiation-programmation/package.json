@@ -8,7 +8,7 @@
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
-    "package": "zip"
+    "package": "grunt zip"
   },
   "author": {
     "name": "Hakim El Hattab",
