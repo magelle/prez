@@ -1,271 +1,478 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Domain Driven Design - Rex</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>Domain Driven Design - Rex</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>DDD - a Quick ReX</h1>
+			</section>
+
+			<section>
 				<section>
-					<h1>DDD - a Quick ReX</h1>
+					<h1>DDD Intro</h1>
+					<h2>Domain Driven Design</h2>
 				</section>
-				
 				<section>
-					<section>
-						<h1>DDD Intro</h1>
-						<h2>Domain Driven Design</h2>
-					</section>
-					<section>
-						<h2>Strategic Patterns</h2>
-						<h3>Domain discovering</h3>
-						<h3>What to do ?</h3>
-						<img src="images/lego-shield-gathering.jpg" alt="Avengers gathring"/>
-					</section>
-					<section>
-						<h2>Tactic Patterns</h2>
-						<img src="images/lego-military-battle.jpg" alt="Lega battle"/>
-					</section>
-				</section>
-
-				<section>
-					<section>
-						<h1>Understand business</h1>
-					</section>
-					<section>
-						<h2>Legacy</h2>
-						<img src="images/lego-stairs.jpg" alt=""/>
-					</section>
-					<section>
-						<h2>The "team" case</h2>
-						<img src="images/lego-A-Team.jpg" alt="The A team" />
-					</section>
-					<section>
-						<h3>One user : several "Teams"</h3>
-						<img src="images/lego-avengers-civil-war-with-banner.jpg" alt="Several teams for one user" /> 
-					</section>
-					<section>
-						<h3>In fact : Several sectors</h3>
-						<table>
-							<tr>
-								<th>Sector</th>
-								<td><img src="images/lego-plane.jpg" alt="A plane" width="200px"/></td>
-								<td><img src="images/lego-car.jpg" alt="A car" width="200px"/></td>
-								<td><img src="images/lego-chemistry.jpg" alt="A chemist" width="200px"/></td>
-							</tr>
-							<tr>
-								<th>Coverage</th>
-								<td>Team 1</td>
-								<td>Team 2</td>
-								<td>Team 3</td>
-							</tr>
-							<tr>
-								<th>Risk</th>
-								<td>Team A</td>
-								<td>Team B</td>
-								<td>Team C</td>
-							</tr>
-						</table>
-					</section>
-					<section>
-						<h3>Magical Reorganisation</h3>
-						<img src="images/lego-building.webp" alt="A lego construction building" />
-					</section>
-					<section>
-						<h3>How it is IRL</h3>
-							<table>
-								<tr>
-									<th>Sector</th>
-									<td><img src="images/lego-plane.jpg" alt="A plane" width="200px"/></td>
-									<td><img src="images/lego-car.jpg" alt="A car" width="200px"/></td>
-									<td><img src="images/lego-chemistry.jpg" alt="A chemist" width="200px"/></td>
-								</tr>
-								<tr>
-									<th>Risk</th>
-									<td>Team 1</td>
-									<td>Team 2</td>
-									<td>Team 3</td>
-								</tr>
-							</table>
-					</section>
-					<section>
-							<h3>How it is IRL</h3>
-							<table>
-									<tr>
-										<th>Company</th>
-										<td><img src="images/lego-octane-logo.jpg" alt="Octane company logo" width="200px"/></td>
-										<td><img src="images/lego-airline-logo.jpg" alt="Lego Airline logo" width="200px"/></td>
-										<td><img src="images/lego-cargo-company.jpg" alt="Lego Cargo logo" width="200px"/></td>
-										<td><img src="images/lego-postal-service.jpg" alt="Lego Postal service logo" width="200px"/></td>
-									</tr>
-									<tr>
-										<th>Coverage</th>
-										<td>Team A</td>
-										<td>Team B</td>
-										<td>Team C</td>
-										<td>Team D</td>
-									</tr>
-								</table>
-					</section>
-					<section>
-						<h3>But software</h3>
-						<img src="images/lego-builders.webp" alt="lego minifig building"/>
-					</section>
-					<section>
-						<h3>What we did ?</h3>
+					<h2>Strategic Patterns</h2>
+					<h3>Domain discovering</h3>
+					<h3>What to do ?</h3>
+					<img src="images/lego-shield-gathering.jpg" alt="Avengers gathring" />
+					<aside class="notes">
 						<ul>
-							<li>Ask why, why, why</li>
-							<li>Express problems</li>
+							<li>Comment comprendre le métier</li>
+							<li>Modéliser le métier</li>
+							<li>Patterns de haut niveau</li>
+							<li>Ubiquitous language</li>
+							<li>Bounded context</li>
 						</ul>
-					</section>
-					<section>
-						<h2>How to dig in ?</h2>
-						<ul>
-							<li>Understand, deeply</li>
-							<li>Communicate</li>
-							<li>Find experts</li>
-							<li>Challenge PO / PPO</li>
-						</ul>
-					</section>
-					<section>
-						<h2></h2>
-						<ul>
-							<li>Try event storming</li>
-							<li>Try story mapping</li>
-						</ul>
-					</section>
+					</aside>
 				</section>
-				
 				<section>
-					<section>
-						<h1>Modeling Business</h1>
-					</section>
-					<section>
-						<h2>Bounded context</h2>
-						<img src="images/lego-border.jpeg" alt="A border post" />
-					</section>
-					<section>
-						<h2>The "request version" case</h2>
-					</section>
-					<section>
-						<h3>First a request</h3>
-						<img src="images/lego-typewriter.jpg" alt="a typewriter" />
-					</section>
-					<section>
-						<h3>Analysis</h3>
-						<img src="images/lego-detective.jpg" alt="a detective" />
-					</section>
-					<section>
-						<h3>And a decision</h3>
-						<img src="images/lego-thumb-up.gif" alt="Thumb up"/>
-					</section>
-					<section>
-						<h3>But what if</h3>
-						<img src="images/lego-no.webp" alt="Batman saying No"/>
-					</section>
-					<section>
-						<h3>Do it again !</h3>
-						<img src="images/lego-frustrated.gif" alt="A furstrated minifig" />
-					</section>
-					<section>
-						<h3>Version to the rescue</h3>
-						<img src="images/lego-batman-movie-all-suits.jpg" alt="Several suits of Batman in the lego batman movie" />
-					</section>
-					<section>
-						<h3>Or it's a contract</h3>
-						<img src="images/lego-hanshake.jpg" alt="a handshake" />
-					</section>
-					<section>
-						<h2>A new bounded context</h2>
-						<img src="images/lego-lightbulb.jpg" alt="A lightbulb" />
-					</section>
-					<section>
-						<h2>Materialise it</h2>
+					<h2>Tactic Patterns</h2>
+					<img src="images/lego-military-b class=" notes">attle.jpg" alt="Lega battle"/>
+					<aside class="notes">
 						<ul>
-							<li>Look for clue</li>
-							<li>Materialise</li>
-							<li>Communicate</li>
-							<li>Refactor</li>
+							<li>Organiser le code</li>
+							<li>Moins interessant</li>
 						</ul>
-					</section>
-					<section>
-						<ul>
-							<li>ACL</li>
-							<li>Hexagonal architecture</li>
-							<li>Micro-services / micro front-end</li>
-						</ul>
-					</section>
+					</aside>
 				</section>
-				
-				<section>
-					<section>
-						<h1>Feedbacks</h1>
-					</section>
-					<section>
-						<h2>Business is discovered</h2>
-						<img src="images/lego-indian-jones.jpg" alt="Indian Jones" />
-					</section>
-					<section>
-						<h2>Several bounded context</h2>
-						<img src="images/lego-map.png" alt="a map" />
-					</section>
-					<section>
-						<h2>Understand then document</h2>
-						<img src="images/lego-book.jpg" alt="A book" />
-					</section>
-					<section>
-						<h2>Refactor</h2>
-						<img src="images/lego-tools.jpg" alt="some tools" />
-					</section>
-					<section>
-						<h2>Database</h2>
-						<img src="images/lego-toothbrush.jpg" alt="a toothbrush" />
-					</section>
-				</section>
+			</section>
 
+			<section>
 				<section>
-					<h1>Conclusion</h1>
+					<h1>Understand business</h1>
+					<aside class="notes">
+						<ul>
+							<li>Avant de modéliser, comprendre</li>
+						</ul>
+					</aside>
 				</section>
-				
 				<section>
-					<h1>Questions ?</h1>
+					<h2>Legacy</h2>
+					<img src="images/lego-stairs.jpg" alt="" />
+					<aside class="notes">
+						<ul>
+							<li>Ce qui est hérité</li>
+							<li>Legacy technique : le code pourri</li>
+							<li>Legacy fonctionnel : les features pourri / trop complexe</li>
+							<li>Legacy SI / organisationnel : pas de golden source, ...</li>
+						</ul>
+					</aside>
 				</section>
-			</div>
+				<section>
+					<h2>The "team" case</h2>
+					<img src="images/lego-A-Team.jpg" alt="The A team" />
+				</section>
+				<section>
+					<h3>One user : several "Teams"</h3>
+					<img src="images/lego-avengers-civil-war-with-banner.jpg" alt="Several teams for one user" />
+					<aside class="notes">
+						<ul>
+							<li>Un user -> plusieurs teams</li>
+							<li>vrai que dans l'application</li>
+							<li>Pas dans l'organisation</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>In fact : Several sectors</h3>
+					<table>
+						<tr>
+							<th>Sector</th>
+							<td><img src="images/lego-plane.jpg" alt="A plane" width="200px" /></td>
+							<td><img src="images/lego-car.jpg" alt="A car" width="200px" /></td>
+							<td><img src="images/lego-chemistry.jpg" alt="A chemist" width="200px" /></td>
+						</tr>
+						<tr>
+							<th>Coverage</th>
+							<td>Team 1</td>
+							<td>Team 2</td>
+							<td>Team 3</td>
+						</tr>
+						<tr>
+							<th>Risk</th>
+							<td>Team A</td>
+							<td>Team B</td>
+							<td>Team C</td>
+						</tr>
+					</table>
+					<aside class="notes">
+						<ul>
+							<li>Une team un secteur</li>
+							<li>à l'origine les différents bureaux était alignés</li>
+							<li>Logiciel conçu pour cette organisation</li>
+							<li>Une Team est en fait un secteur</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Magical Reorganisation</h3>
+					<img src="images/lego-building.webp" alt="A lego construction building" />
+					<aside class="notes">
+						<ul>
+							<li>Les bureaux de réorganisent</li>
+							<li>Ils ne sont plus séparés par secteurs</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>How it is IRL</h3>
+					<table>
+						<tr>
+							<th>Sector</th>
+							<td><img src="images/lego-plane.jpg" alt="A plane" width="200px" /></td>
+							<td><img src="images/lego-car.jpg" alt="A car" width="200px" /></td>
+							<td><img src="images/lego-chemistry.jpg" alt="A chemist" width="200px" /></td>
+						</tr>
+						<tr>
+							<th>Risk</th>
+							<td>Team 1</td>
+							<td>Team 2</td>
+							<td>Team 3</td>
+						</tr>
+					</table>
+					<aside class="notes">
+						<ul>
+							<li>Une team - des secteurs</li>
+							<li>Parfois plus compliqués</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>How it is IRL</h3>
+					<table>
+						<tr>
+							<th>Company</th>
+							<td><img src="images/lego-octane-logo.jpg" alt="Octane company logo" width="200px" /></td>
+							<td><img src="images/lego-airline-logo.jpg" alt="Lego Airline logo" width="200px" /></td>
+							<td><img src="images/lego-cargo-company.jpg" alt="Lego Cargo logo" width="200px" /></td>
+							<td><img src="images/lego-postal-service.jpg" alt="Lego Postal service logo"
+									width="200px" /></td>
+						</tr>
+						<tr>
+							<th>Coverage</th>
+							<td>Team A</td>
+							<td>Team B</td>
+							<td>Team C</td>
+							<td>Team D</td>
+						</tr>
+						<aside class="notes">
+							<ul>
+								<li>Une team - des legal entities</li>
+								<li>Parfois plus compliqués</li>
+							</ul>
+						</aside>
+					</table>
+				</section>
+				<section>
+					<h3>But software</h3>
+					<img src="images/lego-builders.webp" alt="lego minifig building" />
+					<aside class="notes">
+						<ul>
+							<li>L'application devient inadapté</li>
+							<li>Modélisation teams faites par le support: fastidieux</li>
+							<li>Les utilisateurs ne font pas les réoganisations</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>What we did ?</h3>
+					<ul>
+						<li>Ask why, why, why</li>
+						<li>Express problems</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Explorer ce qui est étrange pour comprendre</li>
+							<li>Chercher les vrais experts</li>
+							<li>Expliquer ce qu'on a trouvé</li>
+							<li>Montrer les problèmes</li>
+							<li>Refactorer</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Tools ?</h2>
+					<ul>
+						<li>Try event storming</li>
+						<li>Try story mapping</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>A faire avec les utilisateurs</li>
+							<li>Avec toute l'équipe de dev</li>
+							<li>Régulièrement</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Modeling Business</h1>
+					<aside class="notes">
+						<ul>
+							<li>Après avoir compris</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Bounded context</h2>
+					<img src="images/lego-border.jpeg" alt="A border post" />
+					<aside class="notes">
+						<ul>
+							<li>Exprimer les frontières</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>The "request version" case</h2>
+				</section>
+				<section>
+					<h3>First a request</h3>
+					<img src="images/lego-typewriter.jpg" alt="a typewriter" />
+					<aside class="notes">
+						<ul>
+							<li>Une demande d'approbation de credit</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Analysis</h3>
+					<img src="images/lego-detective.jpg" alt="a detective" />
+					<aside class="notes">
+						<ul>
+							<li>Analyse de la contrepartie</li>
+							<li>Analyse du projet</li>
+							<li>Analyse du secteur</li>
+							<li>...</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>And a decision</h3>
+					<img src="images/lego-thumb-up.gif" alt="Thumb up" />
+					<aside class="notes">
+						<ul>
+							<li>Décision possibles</li>
+							<li>Oui</li>
+							<li>Oui mais à condidion de ...</li>
+							<li>Non</li>
+							<li>Il manque des innformations</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>But what if</h3>
+					<img src="images/lego-no.webp" alt="Batman saying No" />
+					<aside class="notes">
+						<ul>
+							<li>Le besoin change en cours de route</li>
+							<li>Mon client change d'avis</li>
+							<li>...</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Do it again !</h3>
+					<img src="images/lego-frustrated.gif" alt="A furstrated minifig" />
+					<aside class="notes">
+						<ul>
+							<li>On doit tout recommencer</li>
+							<li>Du début</li>
+							<li>Mais certaines parties de l'analyse est toujours valide</li>
+							<li>Comment les réutilisés</li>
+							<li>Comment relier les évolutions de la demande ?</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Version to the rescue</h3>
+					<img src="images/lego-batman-movie-all-suits.jpg"
+						alt="Several suits of Batman in the lego batman movie" />
+					<aside class="notes">
+						<ul>
+							<li>Une évolution = une nouvelle version</li>
+							<li>Mais c'est bizarre des version</li>
+							<li>La dernière version approvée est importante !</li>
+							<li>Besoins étranges :</li>
+							<li>Modification de la demande après décision !</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Or it's a contract</h3>
+					<img src="images/lego-hanshake.jpg" alt="a handshake" />
+					<aside class="notes">
+						<ul>
+							<li>Avec son cycle de vie</li>
+							<li>Une opportunité</li>
+							<li>Opportunité approvée</li>
+							<li>Un contrat</li>
+							<li>Des amendements au contrat</li>
+							<li>...</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>A new bounded context</h2>
+					<img src="images/lego-lightbulb.jpg" alt="A lightbulb" />
+					<aside class="notes">
+						<ul>
+							<li>Contrat -> Nouveau context</li>
+							<li>Cycle de vie différent</li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Materialise it</h2>
+					<ul>
+						<li>Look for clue</li>
+						<li>Materialise</li>
+						<li>Communicate</li>
+						<li>Refactor</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>domaine == métier</li>
+							<li>Il faut convaincre</li>
+							<li>refactoring</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Tools ?</h2>
+					<ul>
+						<li>ACL</li>
+						<li>Hexagonal architecture</li>
+						<li>Micro-services / micro front-end</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Feedbacks</h1>
+				</section>
+				<section>
+					<h2>Business is discovered</h2>
+					<img src="images/lego-indian-jones.jpg" alt="Indian Jones" />
+					<aside class="notes">
+						<ul>
+							<li>On découvre le métier et son organisation</li>
+							<li>Petit à petit</li>
+							<li>Tout comprendre au début est impossible</li>
+							<li>La compréhension évolue</li>
+							<li>Des refactoring obligatoire</li>
+							<li>Sinon legacy fonctionnel</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Several bounded context</h2>
+					<img src="images/lego-map.png" alt="a map" />
+					<aside class="notes">
+						<ul>
+							<li>Une application</li>
+							<li>Plusieurs context</li>
+							<li>Les frontière sont floue</li>
+							<li>Les matérialisés</li>
+							<li>C'est fonctionnel et non technique</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Understand then document</h2>
+					<img src="images/lego-book.jpg" alt="A book" />
+					<aside class="notes">
+						<ul>
+							<li>Documenter connaissance métier</li>
+							<li>Documenter décisions (ADR)</li>
+							<li>questions au bout de 3 mois, c'est quoi ce champs ?</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Refactor</h2>
+					<img src="images/lego-tools.jpg" alt="some tools" />
+					<aside class="notes">
+						<ul>
+							<li>Souvent</li>
+							<li>Matérialiser les domains</li>
+							<li>Les rendre indépendants</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Database</h2>
+					<img src="images/lego-toothbrush.jpg" alt="a toothbrush" />
+					<aside class="notes">
+						<ul>
+							<li>Comme un brosse à dent</li>
+							<li>ça se partage pas</li>
+							<li>Sinon couplage</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<h1>Conclusion</h1>
+				<aside class="notes">
+					<ul>
+						<li></li>
+					</ul>
+				</aside>
+			</section>
+
+			<section>
+				<h1>Questions ?</h1>
+			</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
 </html>
