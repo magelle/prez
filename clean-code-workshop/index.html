@@ -517,28 +517,33 @@
                 </section>
                 <section>
                     <h2>Liskov substitution</h2>
-                    <pre class="fragment fade-in"><code>
-            List&lt;String&gt; emails = Collections.unmodifiableList();
-            // ... plus loin dans le code
-            emails.add("maxime.gelle@novencia.com");
-            // Compile but throw UnsupportedOperationException
-
-            List&lt;String&gt; names = new ArrayList&lt;String&gt;();
-            name.add("Maxime GELLE"); // Works !
-            </code></pre>
-                    <span class="fragment fade-in">
-                        <pre><code>
-            UnmodifiableList&lt;String&gt; emails = Collections.unmodifiableList();
-            strings.add("maxime.gelle@novencia.com"); // Don't compile
-
-            List&lt;String&gt; names = new ArrayList&lt;String&gt;();
-            name.add("Maxime GELLE"); // Works !
-            </code></pre>
-                        <ul>
-                            <li>Erreur à la compilation</li>
-                            <li>Pas au runtime</li>
-                            <li>Evite l'apparation de bugs</li>
-                        </ul>
+                    <table>
+                        <tr>
+                            <td><pre class="fragment fade-in" data-fragment-index="1"><code>public class Book {
+                public String getTitle();
+                public String getDescription();
+            }</code></pre></td>
+            <td><pre class="fragment fade-in" data-fragment-index="1"><code>public class AudioBook {
+                public String getTitle();
+                public String getDescription();
+                ...
+                public Audio playSample();
+            }</code></pre></td>                
+                        </tr>
+                        <tr>
+                            <td><pre class="fragment fade-in" data-fragment-index="2"><code>public interface WithSample {
+                public Audio playSample();
+            }</code></pre></td>                    
+                            <td><pre class="fragment fade-in" data-fragment-index="2"><code>public class AudioBook extends WithSample {
+                ...
+            }</code></pre></td>
+                        </tr>
+                    </table>
+                    <ul>
+                        <li>Erreur à la compilation</li>
+                        <li>Pas au runtime</li>
+                        <li>Evite l'apparation de bugs</li>
+                    </ul>
                     </span>
                     <aside class="notes">
                         <ul>
@@ -550,28 +555,39 @@
                 </section>
                 <section>
                     <h2>Interface segregation</h2>
-                    <pre class="fragment fade-in"><code>
+                    <table>
+                        <tr>
+            <td><pre class="fragment fade-in" data-fragment-index="1"><code>
             public class User {
+              private String firstname, lastname, email;
+              private List&lt;Item&gt; purchasedItems;
+              private List&ltProduct&gt; cartProductIds;
+              private String address1;
+              private String address2;
+              private String zipCode;
+              private String city;
+              private Integer lastPurchaseId;
+              private List&lt;Integer&gt; allPurchaseIds; 
+            }</code></pre></td>
+            <td><pre class="fragment fade-in" data-fragment-index="1"><code>public sendItem(User user, Item item) {
+                ...
+                }</code></pre></td>
+
+                        </tr>
+                        <tr>
+                            <td><pre class="fragment fade-in" data-fragment-index="2"><code>public interface Recipient {
                 private String firstname, lastname, email;
-                private List&lt;Item&gt; purchasedItems;
-                private List&ltProduct&gt; cartProductIds;
                 private String address1;
                 private String address2;
                 private String zipCode;
                 private String city;
-                private Integer lastPurchaseId;
-                private List&lt;Integer&gt; allPurchaseIds; 
+            }</code></pre></td>
+            <td><pre class="fragment fade-in" data-fragment-index="2"><code>public sendItem(Recipient user, Package package) {
+              ...
             }
-                </code></pre>
-                    <pre class="fragment fade-in"><code>
-            public class Recipient {
-                private String firstname, lastname, email;
-                private String address1;
-                private String address2;
-                private String zipCode;
-                private String city;
-            }
-                    </code></pre>
+            </code></pre></td>
+                        </tr>
+                    </table>
                     <aside class="notes">
                         <p>User a l'air d'être complet cependant il n'a pas une forte cohésion.</p>
                         <p>Suivant les usages, tout n'est pas rempli</p>
@@ -611,6 +627,8 @@
                         <li>Maintenabilité</li>
                     </ul>
                     <aside class="notes">
+                        <p>High-level modules should not depend on low-level modules. Both should depend on abstractions..</p>
+                        <p>Abstractions should not depend on details. Details should depend on abstractions.</p>
                         <p>Je ne peux pas changer EventLogWriter par une autre classe</p>
                         <p>ex: EmailNotifier</p>
                     </aside>
