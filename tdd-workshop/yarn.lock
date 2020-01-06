@@ -1216,11 +1216,6 @@ grunt-contrib-watch@~1.0.0:
     lodash "^4.0.0"
     tiny-lr "^0.2.1"
 
-grunt-includes@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/grunt-includes/-/grunt-includes-1.1.0.tgz#828f64fa4aa439b0f74742e0f040478cc6f45c9b"
-  integrity sha512-aZQfL+fiAonPI173QUjGyuCkaUTJci7+a5SkmSAbezUikwLban7Jp6W+vbA/Mnacmy+EPipnuK5kAF6O0SvrDw==
-
 grunt-known-options@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/grunt-known-options/-/grunt-known-options-1.1.1.tgz#6cc088107bd0219dc5d3e57d91923f469059804d"
