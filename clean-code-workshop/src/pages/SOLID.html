@@ -127,20 +127,26 @@ public double size(List&lt;Product&gt; items) {
                 <td><pre class="fragment fade-in" data-fragment-index="1"><code>public class Book {
     public String getTitle();
     public String getDescription();
+    public Integer getPageNumber();
 }</code></pre></td>
-<td><pre class="fragment fade-in" data-fragment-index="1"><code>public class AudioBook {
+<td><pre class="fragment fade-in" data-fragment-index="1"><code>public class AudioBook extends Book {
     public String getTitle();
     public String getDescription();
+    public Integer getPageNumber(); // ?????
     ...
     public Audio playSample();
 }</code></pre></td>                
             </tr>
             <tr>
-                <td><pre class="fragment fade-in" data-fragment-index="2"><code>public interface WithSample {
+<td><pre class="fragment fade-in" data-fragment-index="2"><code>public class Book {
+    public String getTitle();
+    public String getDescription();
+    public Integer getPageNumber();
+}</code></pre></td>
+<td><pre class="fragment fade-in" data-fragment-index="2"><code>public class AudioBook {
+    public String getTitle();
+    public String getDescription();
     public Audio playSample();
-}</code></pre></td>                    
-                <td><pre class="fragment fade-in" data-fragment-index="2"><code>public class AudioBook extends WithSample {
-    ...
 }</code></pre></td>
             </tr>
         </table>
@@ -155,6 +161,7 @@ public double size(List&lt;Product&gt; items) {
                 <li>une implementation doit être remplacable par n'importe quel implémentation</li>
                 <li>ex : HashMap, TreeMap</li>
                 <li>interface = contrat</li>
+                <li>If it looks like a duck and quacks ike a duck but needs battery you probalbly have the wrong abstraction/li>
             </ul>
         </aside>
     </section>
