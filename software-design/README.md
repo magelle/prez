@@ -19,6 +19,14 @@ A
 - Mandatory -> complexity to use the service
 - accidental -> uneeded complexity (can tecnical or functionnal)
 
+### Source of complexity
+- States
+- Interdependencies
+- Uncertainty
+- Irreversibility
+
+> Taming Complexity with Reversibility - Kent Beck
+
 ### How to limit the size (and therefore complexity)
 
 - Build several modules
